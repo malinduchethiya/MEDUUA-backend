@@ -1,0 +1,15 @@
+{
+  "projectId": "",
+  "projectName": "MEDUUA",
+  "sites": [
+    {
+      "$id": "meduua-studio",
+      "name": "MEDUUA Studio",
+      "framework": "vite",
+      "source": ".",
+      "output": "dist",
+      "buildCommand": "npm run build",
+      "installCommand": "npm install"
+    }
+  ]
+}

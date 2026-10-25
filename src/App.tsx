@@ -16,10 +16,12 @@ import { ContactPage } from './pages/ContactPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 
 function parseHashRoute(): { page: PageRoute; slug: string | null } {
-  const raw = window.location.hash.replace(/^#\/?/, '');
-  if (!raw) return { page: 'home', slug: null };
+  const raw = window.location.hash.replace(/^#\/?/, '').trim();
+  if (!raw || raw === 'home') return { page: 'home', slug: null };
   const [segment, subSegment] = raw.split('/');
   switch (segment) {
+    case 'home':
+      return { page: 'home', slug: null };
     case 'work':
     case 'projects':
       return subSegment
@@ -61,8 +63,23 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
+  useEffect(() => {
+    const titles: Record<PageRoute, string> = {
+      home: 'MEDUUA — Digital Experiences & Software Studio',
+      projects: 'Work & Projects — MEDUUA',
+      'case-study': 'Case Study — MEDUUA',
+      services: 'Services & Capabilities — MEDUUA',
+      pricing: 'Pricing & Packages — MEDUUA',
+      about: 'About Us — MEDUUA Studio',
+      contact: 'Start a Project — MEDUUA',
+      admin: 'Admin Portal — MEDUUA',
+    };
+    document.title = titles[currentPage] || 'MEDUUA — Digital Experiences & Software Studio';
+  }, [currentPage]);
+
   const handleNavigate = (page: PageRoute, projectSlug?: string) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (projectSlug) {
       setActiveProjectSlug(projectSlug);
       window.location.hash = `#/projects/${projectSlug}`;
