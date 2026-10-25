@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0B110F"/>
+  <!-- Left Sidebar Navigation -->
+  <rect x="0" y="0" width="280" height="900" fill="#102B25"/>
+  <text x="40" y="60" fill="#F4F0E7" font-family="Georgia, serif" font-size="26" font-weight="bold" letter-spacing="3">KAISEL IPTV</text>
+  <text x="40" y="88" fill="#C9A66B" font-family="monospace" font-size="11" letter-spacing="2">BROADCAST CONSOLE</text>
+  <rect x="24" y="135" width="232" height="46" fill="#183D35" stroke="#C9A66B" stroke-width="1"/>
+  <text x="48" y="164" fill="#F4F0E7" font-family="sans-serif" font-size="14" font-weight="bold">01 · Live Channels (HD)</text>
+  <text x="48" y="225" fill="#B5C2BD" font-family="sans-serif" font-size="14">02 · Electronic Program Guide</text>
+  <text x="48" y="275" fill="#B5C2BD" font-family="sans-serif" font-size="14">03 · Sports &amp; Premier Events</text>
+  <text x="48" y="325" fill="#B5C2BD" font-family="sans-serif" font-size="14">04 · International News</text>
+  <text x="48" y="375" fill="#B5C2BD" font-family="sans-serif" font-size="14">05 · Cinema On-Demand</text>
+  <text x="48" y="425" fill="#B5C2BD" font-family="sans-serif" font-size="14">06 · Multi-View Matrix</text>
+  <!-- Top Live Player + Telemetry Split -->
+  <rect x="320" y="40" width="820" height="430" fill="#131D1A" stroke="#263B35" stroke-width="1.5"/>
+  <rect x="350" y="70" width="110" height="28" fill="#C9A66B"/>
+  <text x="368" y="89" fill="#111715" font-family="monospace" font-size="12" font-weight="bold">LIVE · CH 104</text>
+  <circle cx="730" cy="240" r="64" fill="none" stroke="#C9A66B" stroke-width="2"/>
+  <polygon points="718,218 718,262 756,240" fill="#C9A66B"/>
+  <text x="350" y="405" fill="#F4F0E7" font-family="Georgia, serif" font-size="30" font-weight="bold">World Architectural Symposium — Live Broadcast</text>
+  <text x="350" y="438" fill="#94A8A1" font-family="monospace" font-size="13">HLS ADAPTIVE STREAM · 1080P60 · 14.8 MBPS · ZERO BUFFER</text>
+  <!-- Right Stream Specifications Card -->
+  <rect x="1170" y="40" width="390" height="430" fill="#111715" stroke="#263B35" stroke-width="1"/>
+  <text x="1205" y="88" fill="#C9A66B" font-family="monospace" font-size="13" letter-spacing="2">UP NEXT ON CH 104</text>
+  <line x1="1205" y1="110" x2="1525" y2="110" stroke="#263B35" stroke-width="1"/>
+  <text x="1205" y="150" fill="#C9A66B" font-family="monospace" font-size="13">21:00 UTC</text>
+  <text x="1205" y="178" fill="#F4F0E7" font-family="Georgia, serif" font-size="22">Design Systems at Scale</text>
+  <text x="1205" y="240" fill="#C9A66B" font-family="monospace" font-size="13">22:30 UTC</text>
+  <text x="1205" y="268" fill="#F4F0E7" font-family="Georgia, serif" font-size="22">The Future of Edge Networks</text>
+  <text x="1205" y="330" fill="#C9A66B" font-family="monospace" font-size="13">00:00 UTC</text>
+  <text x="1205" y="358" fill="#F4F0E7" font-family="Georgia, serif" font-size="22">Late Night Symphony Broadcast</text>
+  <!-- Bottom EPG Timeline Matrix -->
+  <text x="320" y="525" fill="#F4F0E7" font-family="Georgia, serif" font-size="24">Electronic Program Guide (EPG)</text>
+  <g>
+    <rect x="320" y="550" width="220" height="80" fill="#102B25" stroke="#263B35" stroke-width="1"/>
+    <text x="345" y="596" fill="#F4F0E7" font-family="monospace" font-size="14" font-weight="bold">101 · KAISEL PRIME</text>
+    <rect x="550" y="550" width="480" height="80" fill="#183D35" stroke="#C9A66B" stroke-width="1"/>
+    <text x="575" y="585" fill="#F4F0E7" font-family="sans-serif" font-size="15" font-weight="bold">Evening Documentary Showcase</text>
+    <text x="575" y="610" fill="#C9A66B" font-family="monospace" font-size="12">20:00 – 21:30 · LIVE</text>
+    <rect x="1040" y="550" width="520" height="80" fill="#131D1A" stroke="#263B35" stroke-width="1"/>
+    <text x="1065" y="585" fill="#F4F0E7" font-family="sans-serif" font-size="15">Global Cinema Retrospective</text>
+    <text x="1065" y="610" fill="#8A9993" font-family="monospace" font-size="12">21:30 – 23:30</text>
+
+    <rect x="320" y="645" width="220" height="80" fill="#102B25" stroke="#263B35" stroke-width="1"/>
+    <text x="345" y="691" fill="#F4F0E7" font-family="monospace" font-size="14" font-weight="bold">102 · CINE SELECT</text>
+    <rect x="550" y="645" width="640" height="80" fill="#131D1A" stroke="#263B35" stroke-width="1"/>
+    <text x="575" y="680" fill="#F4F0E7" font-family="sans-serif" font-size="15">The Emerald Coast (Director's Cut)</text>
+    <text x="575" y="705" fill="#8A9993" font-family="monospace" font-size="12">19:30 – 22:00</text>
+    <rect x="1200" y="645" width="360" height="80" fill="#131D1A" stroke="#263B35" stroke-width="1"/>
+    <text x="1225" y="680" fill="#F4F0E7" font-family="sans-serif" font-size="15">Behind the Frame</text>
+    <text x="1225" y="705" fill="#8A9993" font-family="monospace" font-size="12">22:00 – 23:00</text>
+
+    <rect x="320" y="740" width="220" height="80" fill="#102B25" stroke="#263B35" stroke-width="1"/>
+    <text x="345" y="786" fill="#F4F0E7" font-family="monospace" font-size="14" font-weight="bold">103 · PULSE NEWS</text>
+    <rect x="550" y="740" width="380" height="80" fill="#131D1A" stroke="#263B35" stroke-width="1"/>
+    <text x="575" y="775" fill="#F4F0E7" font-family="sans-serif" font-size="15">Asia-Pacific Market Briefing</text>
+    <text x="575" y="800" fill="#8A9993" font-family="monospace" font-size="12">20:00 – 21:00</text>
+    <rect x="940" y="740" width="620" height="80" fill="#131D1A" stroke="#263B35" stroke-width="1"/>
+    <text x="965" y="775" fill="#F4F0E7" font-family="sans-serif" font-size="15">International Technology &amp; Policy Forum</text>
+    <text x="965" y="800" fill="#8A9993" font-family="monospace" font-size="12">21:00 – 23:00</text>
+  </g>
+</svg>

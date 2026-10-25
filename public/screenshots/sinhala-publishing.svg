@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#F4F0E7"/>
+  <!-- Editorial Masthead -->
+  <line x1="100" y1="95" x2="1500" y2="95" stroke="#111715" stroke-width="2"/>
+  <line x1="100" y1="103" x2="1500" y2="103" stroke="#111715" stroke-width="0.75"/>
+  <text x="100" y="68" fill="#102B25" font-family="Georgia, serif" font-size="30" font-weight="bold" letter-spacing="3">මෙත්තා · LITERARY &amp; CULTURAL JOURNAL</text>
+  <text x="1210" y="66" fill="#4A5551" font-family="monospace" font-size="13" letter-spacing="1.5">ISSUE NO. 18 · COLOMBO EDITION</text>
+  <!-- Main Editorial Grid -->
+  <line x1="940" y1="135" x2="940" y2="830" stroke="#D5CFC2" stroke-width="1.5"/>
+  <!-- Lead Feature Article -->
+  <text x="100" y="165" fill="#102B25" font-family="monospace" font-size="13" letter-spacing="2">FEATURE ESSAY · CONTEMPORARY LITERATURE</text>
+  <text x="100" y="235" fill="#111715" font-family="Georgia, serif" font-size="52" font-weight="bold">Typography &amp; Modern</text>
+  <text x="100" y="295" fill="#111715" font-family="Georgia, serif" font-size="52" font-weight="bold">Sinhala Digital Publishing</text>
+  <text x="100" y="345" fill="#4A5551" font-family="sans-serif" font-size="17">Crafting a distraction-free reading environment tailored for native Indic script rendering and long-form essays.</text>
+  <!-- Editorial Illustration Box -->
+  <rect x="100" y="385" width="790" height="295" fill="#102B25"/>
+  <text x="155" y="495" fill="#C9A66B" font-family="Georgia, serif" font-size="64">අක්ෂර කලාව</text>
+  <text x="155" y="555" fill="#F4F0E7" font-family="Georgia, serif" font-size="24">Bespoke Unicode OpenType Shaping &amp; Archival Publishing Engine</text>
+  <line x1="155" y1="590" x2="540" y2="590" stroke="#C9A66B" stroke-width="1"/>
+  <text x="155" y="625" fill="#B5C2BD" font-family="monospace" font-size="13">READ TIME: 8 MIN ·UNICODE 15.1 COMPLIANT</text>
+  <!-- Article Columns Below -->
+  <rect x="100" y="715" width="370" height="10" fill="#111715" fill-opacity="0.75"/>
+  <rect x="100" y="738" width="350" height="10" fill="#111715" fill-opacity="0.55"/>
+  <rect x="100" y="761" width="360" height="10" fill="#111715" fill-opacity="0.55"/>
+  <rect x="100" y="784" width="290" height="10" fill="#111715" fill-opacity="0.55"/>
+  <rect x="515" y="715" width="370" height="10" fill="#111715" fill-opacity="0.75"/>
+  <rect x="515" y="738" width="340" height="10" fill="#111715" fill-opacity="0.55"/>
+  <rect x="515" y="761" width="365" height="10" fill="#111715" fill-opacity="0.55"/>
+  <rect x="515" y="784" width="310" height="10" fill="#111715" fill-opacity="0.55"/>
+  <!-- Right Column: Curated Monograph Index -->
+  <text x="990" y="165" fill="#102B25" font-family="monospace" font-size="13" letter-spacing="2">LATEST MONOGRAPHS</text>
+  <g>
+    <text x="990" y="225" fill="#C9A66B" font-family="monospace" font-size="14" font-weight="bold">01</text>
+    <text x="990" y="258" fill="#111715" font-family="Georgia, serif" font-size="26" font-weight="bold">Architectural Heritage of Kandy</text>
+    <text x="990" y="288" fill="#5A6561" font-family="sans-serif" font-size="14">By Dr. N. Wijesekera · 12 min read</text>
+    <line x1="990" y1="318" x2="1500" y2="318" stroke="#D5CFC2" stroke-width="1"/>
+
+    <text x="990" y="365" fill="#C9A66B" font-family="monospace" font-size="14" font-weight="bold">02</text>
+    <text x="990" y="398" fill="#111715" font-family="Georgia, serif" font-size="26" font-weight="bold">Poetics of the Monsoon Coast</text>
+    <text x="990" y="428" fill="#5A6561" font-family="sans-serif" font-size="14">By K. Amarasinghe · 9 min read</text>
+    <line x1="990" y1="458" x2="1500" y2="458" stroke="#D5CFC2" stroke-width="1"/>
+
+    <text x="990" y="505" fill="#C9A66B" font-family="monospace" font-size="14" font-weight="bold">03</text>
+    <text x="990" y="538" fill="#111715" font-family="Georgia, serif" font-size="26" font-weight="bold">Modernist Print Archives (1950–1980)</text>
+    <text x="990" y="568" fill="#5A6561" font-family="sans-serif" font-size="14">By S. Ratnayake · 15 min read</text>
+    <line x1="990" y1="598" x2="1500" y2="598" stroke="#D5CFC2" stroke-width="1"/>
+  </g>
+  <rect x="990" y="640" width="510" height="165" fill="#EAE4D6" stroke="#102B25" stroke-width="1"/>
+  <text x="1025" y="685" fill="#102B25" font-family="Georgia, serif" font-size="22" font-weight="bold">Writer &amp; Editor Studio</text>
+  <text x="1025" y="718" fill="#4A5551" font-family="sans-serif" font-size="14">Real-time collaborative Sinhala &amp; English manuscript typesetting</text>
+  <rect x="1025" y="742" width="180" height="38" fill="#102B25"/>
+  <text x="1055" y="766" fill="#F4F0E7" font-family="sans-serif" font-size="12" letter-spacing="1.5">OPEN MANUSCRIPT</text>
+</svg>

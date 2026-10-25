@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0B0E0D"/>
+  <!-- Architectural Grid -->
+  <g stroke="#1E2B26" stroke-width="1">
+    <line x1="0" y1="80" x2="1600" y2="80"/>
+    <line x1="0" y1="820" x2="1600" y2="820"/>
+    <line x1="120" y1="0" x2="120" y2="900"/>
+    <line x1="560" y1="80" x2="560" y2="820"/>
+    <line x1="1120" y1="80" x2="1120" y2="820"/>
+    <line x1="1480" y1="0" x2="1480" y2="900"/>
+  </g>
+  <!-- Top Bar -->
+  <text x="160" y="50" fill="#F4F0E7" font-family="Georgia, serif" font-size="22" letter-spacing="6">WHITE ROOM : THE PROTOCOL</text>
+  <text x="1160" y="48" fill="#C9A66B" font-family="monospace" font-size="14" letter-spacing="2">SEQUENCE 04 · ARCHIVE VERIFIED</text>
+  <!-- Left Column: Narrative Dossier -->
+  <rect x="160" y="130" width="360" height="640" fill="#111715" stroke="#253530" stroke-width="1"/>
+  <text x="195" y="185" fill="#C9A66B" font-family="monospace" font-size="13" letter-spacing="3">DOSSIER // SUBJECT 09</text>
+  <text x="195" y="235" fill="#F4F0E7" font-family="Georgia, serif" font-size="34">The Chamber of</text>
+  <text x="195" y="278" fill="#F4F0E7" font-family="Georgia, serif" font-size="34">Silent Directives</text>
+  <line x1="195" y1="310" x2="485" y2="310" stroke="#253530" stroke-width="1"/>
+  <rect x="195" y="340" width="290" height="10" fill="#1D2925"/>
+  <rect x="195" y="365" width="250" height="10" fill="#1D2925"/>
+  <rect x="195" y="390" width="275" height="10" fill="#1D2925"/>
+  <rect x="195" y="440" width="290" height="140" fill="#0D1210" stroke="#C9A66B" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="215" y="475" fill="#C9A66B" font-family="monospace" font-size="12">DECISION NODE A-7</text>
+  <text x="215" y="508" fill="#F4F0E7" font-family="sans-serif" font-size="15">Isolate cognitive acoustic channel</text>
+  <text x="215" y="535" fill="#8A9993" font-family="monospace" font-size="12">PROBABILITY THRESHOLD: 94.2%</text>
+  <rect x="195" y="690" width="290" height="48" fill="#C9A66B"/>
+  <text x="275" y="720" fill="#111715" font-family="sans-serif" font-weight="bold" font-size="13" letter-spacing="2">ENTER SEQUENCE</text>
+  <!-- Center Viewport: Isometric White Room Chamber -->
+  <rect x="595" y="130" width="490" height="640" fill="#F4F0E7"/>
+  <rect x="635" y="170" width="410" height="420" fill="#EAE4D7" stroke="#111715" stroke-width="1.5"/>
+  <line x1="635" y1="170" x2="735" y2="270" stroke="#111715" stroke-width="1"/>
+  <line x1="1045" y1="170" x2="945" y2="270" stroke="#111715" stroke-width="1"/>
+  <line x1="635" y1="590" x2="735" y2="490" stroke="#111715" stroke-width="1"/>
+  <line x1="1045" y1="590" x2="945" y2="490" stroke="#111715" stroke-width="1"/>
+  <rect x="735" y="270" width="210" height="220" fill="#FFFFFF" stroke="#111715" stroke-width="2"/>
+  <circle cx="840" cy="380" r="42" fill="none" stroke="#102B25" stroke-width="2"/>
+  <circle cx="840" cy="380" r="6" fill="#C9A66B"/>
+  <text x="635" y="645" fill="#111715" font-family="Georgia, serif" font-size="28" font-weight="bold">PROTOCOL ROOM IV</text>
+  <text x="635" y="675" fill="#4A5551" font-family="monospace" font-size="13" letter-spacing="2">INTERACTIVE SPATIAL ENGINE · 60 FPS WEBGL</text>
+  <line x1="635" y1="705" x2="1045" y2="705" stroke="#111715" stroke-width="1" stroke-opacity="0.2"/>
+  <text x="635" y="738" fill="#111715" font-family="monospace" font-size="13">STATE: SYNCHRONIZED</text>
+  <text x="915" y="738" fill="#102B25" font-family="monospace" font-size="13" font-weight="bold">CHAPTER 04 / 08</text>
+  <!-- Right Column: Telemetry & Branch Matrix -->
+  <rect x="1155" y="130" width="290" height="640" fill="#102B25" stroke="#25443C" stroke-width="1"/>
+  <text x="1185" y="180" fill="#C9A66B" font-family="monospace" font-size="12" letter-spacing="2">NARRATIVE BRANCH TREE</text>
+  <g stroke="#C9A66B" stroke-width="1.5" fill="none">
+    <path d="M1230 230 L1230 480"/>
+    <path d="M1230 290 L1310 340 L1310 440"/>
+    <path d="M1230 390 L1370 430 L1370 520"/>
+  </g>
+  <circle cx="1230" cy="230" r="6" fill="#F4F0E7"/>
+  <circle cx="1230" cy="290" r="6" fill="#C9A66B"/>
+  <circle cx="1310" cy="340" r="6" fill="#C9A66B"/>
+  <circle cx="1310" cy="440" r="6" fill="#F4F0E7"/>
+  <circle cx="1230" cy="480" r="6" fill="#4E6B63"/>
+  <circle cx="1370" cy="520" r="6" fill="#C9A66B"/>
+  <rect x="1185" y="575" width="230" height="160" fill="#0B1D19" stroke="#25443C" stroke-width="1"/>
+  <text x="1205" y="610" fill="#F4F0E7" font-family="monospace" font-size="12">AUDIO SYNTHESIS</text>
+  <g fill="#C9A66B">
+    <rect x="1205" y="640" width="8" height="55"/>
+    <rect x="1221" y="625" width="8" height="70"/>
+    <rect x="1237" y="650" width="8" height="45"/>
+    <rect x="1253" y="618" width="8" height="77"/>
+    <rect x="1269" y="635" width="8" height="60"/>
+    <rect x="1285" y="660" width="8" height="35"/>
+    <rect x="1301" y="628" width="8" height="67"/>
+    <rect x="1317" y="642" width="8" height="53"/>
+    <rect x="1333" y="615" width="8" height="80"/>
+    <rect x="1349" y="648" width="8" height="47"/>
+    <rect x="1365" y="632" width="8" height="63"/>
+  </g>
+</svg>

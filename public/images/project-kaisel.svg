@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="phoneBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c2b26"/>
+      <stop offset="100%" stop-color="#0a120f"/>
+    </linearGradient>
+    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="#080e0c"/>
+  <!-- Ambient Blue/Cyan Glow -->
+  <circle cx="340" cy="250" r="180" fill="#0284c7" opacity="0.15" filter="blur(40px)"/>
+  <circle cx="480" cy="270" r="160" fill="#3b82f6" opacity="0.12" filter="blur(40px)"/>
+
+  <!-- Phone 1 (Left angled phone) -->
+  <g transform="translate(180, 70) rotate(-6)">
+    <!-- Shadow -->
+    <rect x="15" y="15" width="200" height="360" rx="32" fill="#000000" opacity="0.6"/>
+    <!-- Outer Rim -->
+    <rect x="0" y="0" width="200" height="360" rx="32" fill="url(#phoneBody)" stroke="#38bdf8" stroke-width="1.5" stroke-opacity="0.4"/>
+    <!-- Screen -->
+    <rect x="10" y="10" width="180" height="340" rx="24" fill="#071118"/>
+    <!-- Notch/Speaker -->
+    <rect x="75" y="18" width="50" height="6" rx="3" fill="#1e293b"/>
+    <!-- UI Elements inside Phone 1 -->
+    <text x="30" y="55" fill="#38bdf8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700">Kaisel</text>
+    <text x="30" y="75" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="16" font-weight="600">Discover</text>
+    <rect x="30" y="95" width="140" height="85" rx="12" fill="#0f2438" stroke="#0ea5e9" stroke-width="1" stroke-opacity="0.4"/>
+    <circle cx="100" cy="137" r="16" fill="#38bdf8" opacity="0.8"/>
+    <!-- List items -->
+    <rect x="30" y="195" width="140" height="32" rx="8" fill="#0c1a26"/>
+    <rect x="30" y="235" width="140" height="32" rx="8" fill="#0c1a26"/>
+    <rect x="30" y="275" width="140" height="32" rx="8" fill="#0c1a26"/>
+  </g>
+
+  <!-- Phone 2 (Right phone overlapping) -->
+  <g transform="translate(420, 50) rotate(8)">
+    <!-- Shadow -->
+    <rect x="15" y="15" width="200" height="360" rx="32" fill="#000000" opacity="0.7"/>
+    <!-- Outer Rim -->
+    <rect x="0" y="0" width="200" height="360" rx="32" fill="url(#phoneBody)" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.7"/>
+    <!-- Screen -->
+    <rect x="10" y="10" width="180" height="340" rx="24" fill="#050e14"/>
+    <!-- Dynamic island -->
+    <rect x="70" y="18" width="60" height="8" rx="4" fill="#000000"/>
+    <!-- App UI -->
+    <text x="30" y="60" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" letter-spacing="1">NOW PLAYING</text>
+    <circle cx="100" cy="135" r="45" fill="#0b243b" stroke="#38bdf8" stroke-width="2"/>
+    <polygon points="95,123 95,147 113,135" fill="#38bdf8"/>
+    <text x="100" y="210" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="600" text-anchor="middle">Acoustic Focus</text>
+    <text x="100" y="228" fill="#38bdf8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" text-anchor="middle">High Bitrate Lossless</text>
+    <!-- Progress bar -->
+    <rect x="30" y="255" width="140" height="4" rx="2" fill="#1e293b"/>
+    <rect x="30" y="255" width="85" height="4" rx="2" fill="#38bdf8"/>
+    <!-- Bottom Controls -->
+    <circle cx="100" cy="295" r="16" fill="#38bdf8"/>
+    <circle cx="55" cy="295" r="12" fill="#1e293b"/>
+    <circle cx="145" cy="295" r="12" fill="#1e293b"/>
+  </g>
+</svg>

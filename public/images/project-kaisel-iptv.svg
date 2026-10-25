@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <rect width="800" height="500" fill="#070c0a"/>
+
+  <!-- TV Console Outer Frame -->
+  <rect x="70" y="45" width="660" height="410" rx="16" fill="#0d1613" stroke="#1f2f29" stroke-width="2"/>
+  <!-- Inner Glass Screen -->
+  <rect x="85" y="60" width="630" height="380" rx="8" fill="#080f0d"/>
+
+  <!-- Top Navigation Bar of IPTV -->
+  <rect x="85" y="60" width="630" height="40" fill="#102b25"/>
+  <text x="110" y="85" fill="#f4f0e7" font-family="Georgia, serif" font-size="15" font-weight="bold">KAISEL IPTV</text>
+  <text x="230" y="84" fill="#c9a66b" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600">LIVE CHANNELS</text>
+  <text x="340" y="84" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">EPG GUIDE</text>
+  <text x="430" y="84" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">CINEMA</text>
+  <rect x="610" y="70" width="85" height="20" rx="10" fill="#ff3b30"/>
+  <text x="652" y="84" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" text-anchor="middle">LIVE HD</text>
+
+  <!-- Left Sidebar Channel List -->
+  <rect x="85" y="100" width="160" height="340" fill="#0b1310" stroke="#182621" stroke-width="1"/>
+  <g>
+    <!-- Active channel -->
+    <rect x="95" y="112" width="140" height="36" rx="6" fill="#183d35" stroke="#c9a66b" stroke-width="1"/>
+    <text x="110" y="134" fill="#f4f0e7" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="bold">101 Prime HD</text>
+
+    <rect x="95" y="156" width="140" height="36" rx="6" fill="#0f1a16"/>
+    <text x="110" y="178" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">102 Cine Select</text>
+
+    <rect x="95" y="200" width="140" height="36" rx="6" fill="#0f1a16"/>
+    <text x="110" y="222" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">103 Pulse News</text>
+
+    <rect x="95" y="244" width="140" height="36" rx="6" fill="#0f1a16"/>
+    <text x="110" y="266" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">104 Sports Live</text>
+
+    <rect x="95" y="288" width="140" height="36" rx="6" fill="#0f1a16"/>
+    <text x="110" y="310" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">105 Documentaries</text>
+
+    <rect x="95" y="332" width="140" height="36" rx="6" fill="#0f1a16"/>
+    <text x="110" y="354" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">106 4K Ultra</text>
+  </g>
+
+  <!-- Main Player Stream Area -->
+  <rect x="255" y="112" width="450" height="210" rx="8" fill="#111f1a" stroke="#22362f" stroke-width="1.5"/>
+  <circle cx="480" cy="217" r="32" fill="#c9a66b" opacity="0.9"/>
+  <polygon points="474,204 474,230 494,217" fill="#111715"/>
+  <text x="275" y="300" fill="#ffffff" font-family="Georgia, serif" font-size="16" font-weight="bold">Kaisel Cinema Master · Live Stream</text>
+  <text x="275" y="315" fill="#c9a66b" font-family="monospace" font-size="10">1080P60 · ZERO BUFFER · LOW LATENCY HLS</text>
+
+  <!-- Bottom Timeline Schedule Row -->
+  <rect x="255" y="332" width="450" height="96" rx="8" fill="#0b1310" stroke="#182621" stroke-width="1"/>
+  <text x="270" y="352" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold">SCHEDULE TIMELINE</text>
+  <rect x="270" y="362" width="130" height="52" rx="6" fill="#183d35" stroke="#c9a66b" stroke-width="1"/>
+  <text x="280" y="382" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="bold">Emerald Coast</text>
+  <text x="280" y="398" fill="#c9a66b" font-family="monospace" font-size="9">NOW PLAYING</text>
+
+  <rect x="410" y="362" width="140" height="52" rx="6" fill="#0f1a16"/>
+  <text x="420" y="382" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Behind the Lens</text>
+  <text x="420" y="398" fill="#64748b" font-family="monospace" font-size="9">21:30 - 22:30</text>
+
+  <rect x="560" y="362" width="135" height="52" rx="6" fill="#0f1a16"/>
+  <text x="570" y="382" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">Midnight News</text>
+  <text x="570" y="398" fill="#64748b" font-family="monospace" font-size="9">22:30 - 23:30</text>
+</svg>

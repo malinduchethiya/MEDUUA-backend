@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <radialGradient id="portalGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#ff3b30" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#111715" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#050706" stop-opacity="1"/>
+    </radialGradient>
+    <linearGradient id="doorLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#ff453a"/>
+      <stop offset="100%" stop-color="#3a0808"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="#070a09"/>
+
+  <!-- Back Wall & Room Lines -->
+  <line x1="0" y1="0" x2="320" y2="180" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="800" y1="0" x2="480" y2="180" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="0" y1="500" x2="320" y2="380" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="800" y1="500" x2="480" y2="380" stroke="#1b2823" stroke-width="1.5"/>
+  <rect x="320" y="180" width="160" height="200" fill="#0b110f" stroke="#1e2e28" stroke-width="1.5"/>
+
+  <!-- Glowing Doorway in the Center -->
+  <rect x="365" y="195" width="70" height="185" fill="url(#doorLight)"/>
+  <!-- Door Aura Glow -->
+  <circle cx="400" cy="270" r="100" fill="#ff3b30" opacity="0.25" filter="blur(20px)"/>
+
+  <!-- Floor Light Cast -->
+  <polygon points="365,380 435,380 520,500 280,500" fill="#ff3b30" opacity="0.15"/>
+
+  <!-- Dark Silhouette Figure Standing in Front of Door -->
+  <!-- Head -->
+  <circle cx="400" cy="290" r="14" fill="#070a09"/>
+  <!-- Shoulders & Torso -->
+  <path d="M375,370 C375,320 385,310 400,310 C415,310 425,320 425,370 Z" fill="#070a09"/>
+  <!-- Red glowing core dot in chest -->
+  <circle cx="400" cy="335" r="3" fill="#ff453a"/>
+
+  <!-- Title Overlay at Top -->
+  <text x="400" y="80" fill="#ffffff" font-family="'Playfair Display', Georgia, serif" font-size="28" font-weight="700" letter-spacing="4" text-anchor="middle">WHITE ROOM</text>
+  <text x="400" y="105" fill="#c9a66b" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" letter-spacing="3" text-anchor="middle">THE PROTOCOL</text>
+</svg>

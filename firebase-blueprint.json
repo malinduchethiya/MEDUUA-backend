@@ -1,0 +1,359 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A portfolio project case study showcased on the MEDUUA website.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Project title",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "cardTitle": {
+          "type": "string",
+          "description": "Short project title for cards",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "slug": {
+          "type": "string",
+          "description": "URL-friendly identifier",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "category": {
+          "type": "string",
+          "description": "Project category for filtering",
+          "enum": ["Mobile App", "Web Platform", "Streaming", "UI/UX", "Websites"]
+        },
+        "categorySubtitle": {
+          "type": "string",
+          "description": "Card category subtitle",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "client": {
+          "type": "string",
+          "description": "Client or internal venture name",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "year": {
+          "type": "string",
+          "description": "Completion year",
+          "minLength": 4,
+          "maxLength": 10
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Concise summary shown on portfolio cards",
+          "minLength": 10,
+          "maxLength": 400
+        },
+        "overview": {
+          "type": "string",
+          "description": "Detailed case study overview paragraph",
+          "minLength": 20,
+          "maxLength": 2500
+        },
+        "challenge": {
+          "type": "string",
+          "description": "Engineering and design challenges addressed",
+          "minLength": 20,
+          "maxLength": 2500
+        },
+        "solution": {
+          "type": "string",
+          "description": "Technical architecture and design solution",
+          "minLength": 20,
+          "maxLength": 2500
+        },
+        "technologies": {
+          "type": "array",
+          "description": "List of technologies used (up to 10 tags)"
+        },
+        "features": {
+          "type": "array",
+          "description": "Key delivered features (up to 10 items)"
+        },
+        "screenshotUrl": {
+          "type": "string",
+          "description": "Primary screenshot asset path or URL",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "liveUrl": {
+          "type": "string",
+          "description": "Live deployment URL or reference",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "Whether displayed on the homepage featured section"
+        },
+        "order": {
+          "type": "number",
+          "description": "Display sort order"
+        },
+        "status": {
+          "type": "string",
+          "description": "Publication status",
+          "enum": ["Published", "In Progress", "Planning", "Draft"]
+        },
+        "date": {
+          "type": "string",
+          "description": "Human readable date",
+          "minLength": 3,
+          "maxLength": 40
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        }
+      },
+      "required": [
+        "title",
+        "cardTitle",
+        "slug",
+        "category",
+        "categorySubtitle",
+        "client",
+        "year",
+        "shortDescription",
+        "overview",
+        "challenge",
+        "solution",
+        "technologies",
+        "features",
+        "screenshotUrl",
+        "liveUrl",
+        "featured",
+        "order",
+        "status",
+        "date",
+        "updatedAt"
+      ]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "An agency capability offered by MEDUUA (numbered 01-06).",
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "Two-digit editorial index (e.g. 01)",
+          "minLength": 2,
+          "maxLength": 4
+        },
+        "title": {
+          "type": "string",
+          "description": "Service title",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "description": "Service explanation",
+          "minLength": 10,
+          "maxLength": 800
+        },
+        "deliverables": {
+          "type": "array",
+          "description": "Key service deliverables (up to 8 items)"
+        },
+        "iconName": {
+          "type": "string",
+          "description": "Lucide icon identifier",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Right side illustration / screenshot path",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "order": {
+          "type": "number",
+          "description": "Sort order"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        }
+      },
+      "required": ["number", "title", "description", "deliverables", "iconName", "imageUrl", "order", "updatedAt"]
+    },
+    "PricingTier": {
+      "title": "PricingTier",
+      "description": "A website development pricing package.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Package tier name",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "price": {
+          "type": "string",
+          "description": "Formatted price amount (e.g. LKR 10,000)",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Target audience subtitle",
+          "minLength": 4,
+          "maxLength": 160
+        },
+        "description": {
+          "type": "string",
+          "description": "Overview of package scope",
+          "minLength": 10,
+          "maxLength": 500
+        },
+        "features": {
+          "type": "array",
+          "description": "Included package features (up to 12 items)"
+        },
+        "highlighted": {
+          "type": "boolean",
+          "description": "Whether this tier is highlighted as most popular"
+        },
+        "deliveryTime": {
+          "type": "string",
+          "description": "Estimated delivery window",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "buttonText": {
+          "type": "string",
+          "description": "Action button label",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "order": {
+          "type": "number",
+          "description": "Sort order"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modification timestamp"
+        }
+      },
+      "required": ["name", "price", "subtitle", "description", "features", "highlighted", "deliveryTime", "buttonText", "order", "updatedAt"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Customer message or project lead submitted through the contact page.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Sender full name",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Sender email address",
+          "minLength": 5,
+          "maxLength": 150,
+          "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        },
+        "phone": {
+          "type": "string",
+          "description": "WhatsApp or phone number",
+          "minLength": 5,
+          "maxLength": 40
+        },
+        "packageInterest": {
+          "type": "string",
+          "description": "Service or package tier inquiry pertains to",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "budget": {
+          "type": "string",
+          "description": "Estimated budget tier",
+          "maxLength": 60
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed project brief or requirements",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Submission timestamp"
+        }
+      },
+      "required": ["name", "email", "phone", "packageInterest", "message", "createdAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Verified administrative user entry in Firestore.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Admin email address",
+          "minLength": 5,
+          "maxLength": 150
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Record creation timestamp"
+        }
+      },
+      "required": ["email", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/test/{docId}": {
+      "schema": "object",
+      "description": "Health check connection test document (read-only)"
+    },
+    "/projects/{projectId}": {
+      "schema": {
+        "$ref": "#/entities/Project"
+      },
+      "description": "Public portfolio projects catalog with case studies"
+    },
+    "/services/{serviceId}": {
+      "schema": {
+        "$ref": "#/entities/Service"
+      },
+      "description": "Agency service offerings (01-06)"
+    },
+    "/pricing/{pricingId}": {
+      "schema": {
+        "$ref": "#/entities/PricingTier"
+      },
+      "description": "Website development pricing tiers"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": {
+        "$ref": "#/entities/Inquiry"
+      },
+      "description": "Customer contact form and WhatsApp inquiry leads"
+    },
+    "/admins/{adminId}": {
+      "schema": {
+        "$ref": "#/entities/AdminRecord"
+      },
+      "description": "Administrative users registry"
+    }
+  }
+}

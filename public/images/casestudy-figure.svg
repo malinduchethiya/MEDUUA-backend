@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="100%" height="100%">
+  <rect width="500" height="400" fill="#080c0a"/>
+  <!-- Room Perspective -->
+  <line x1="0" y1="0" x2="180" y2="120" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="500" y1="0" x2="320" y2="120" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="0" y1="400" x2="180" y2="280" stroke="#1b2823" stroke-width="1.5"/>
+  <line x1="500" y1="400" x2="320" y2="280" stroke="#1b2823" stroke-width="1.5"/>
+  
+  <rect x="180" y="120" width="140" height="160" fill="#0e1714" stroke="#25352f" stroke-width="1"/>
+  <!-- Glowing Door -->
+  <rect x="220" y="135" width="60" height="145" fill="#f8fafc"/>
+  <circle cx="250" cy="205" r="45" fill="#ffffff" opacity="0.3" filter="blur(12px)"/>
+
+  <!-- Figure Silhouette -->
+  <circle cx="250" cy="235" r="11" fill="#080c0a"/>
+  <path d="M230,300 C230,260 238,252 250,252 C262,252 270,260 270,300 Z" fill="#080c0a"/>
+</svg>

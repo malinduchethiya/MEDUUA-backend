@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0E1714"/>
+  <!-- Top Navigation -->
+  <rect x="0" y="0" width="1600" height="76" fill="#102B25"/>
+  <text x="90" y="48" fill="#F4F0E7" font-family="Georgia, serif" font-size="28" font-weight="bold" letter-spacing="4">KAISEL</text>
+  <text x="260" y="46" fill="#C9A66B" font-family="sans-serif" font-size="14" letter-spacing="1.5">PREMIERES</text>
+  <text x="395" y="46" fill="#B5C2BD" font-family="sans-serif" font-size="14" letter-spacing="1.5">CINEMA ARCHIVE</text>
+  <text x="580" y="46" fill="#B5C2BD" font-family="sans-serif" font-size="14" letter-spacing="1.5"> ORIGINALS</text>
+  <rect x="1360" y="22" width="150" height="34" fill="#C9A66B"/>
+  <text x="1392" y="44" fill="#111715" font-family="sans-serif" font-size="12" font-weight="bold" letter-spacing="1.5">4K STREAMING</text>
+  <!-- Featured Cinema Hero Banner -->
+  <rect x="90" y="110" width="1420" height="420" fill="#14362E" stroke="#284E45" stroke-width="1"/>
+  <circle cx="1140" cy="320" r="165" fill="#102B25" stroke="#C9A66B" stroke-width="1.5" stroke-opacity="0.6"/>
+  <polygon points="1125,285 1125,355 1180,320" fill="#C9A66B"/>
+  <text x="150" y="185" fill="#C9A66B" font-family="monospace" font-size="13" letter-spacing="3">KAISEL EXCLUSIVE PREMIERE · DOLBY VISION</text>
+  <text x="150" y="255" fill="#F4F0E7" font-family="Georgia, serif" font-size="56" font-weight="bold">MONOLITH OF</text>
+  <text x="150" y="318" fill="#F4F0E7" font-family="Georgia, serif" font-size="56" font-weight="bold">THE EMERALD COAST</text>
+  <text x="150" y="368" fill="#CBD5D0" font-family="sans-serif" font-size="16">Directed by V. Senanayake · 2h 18m · Ultra HD Master</text>
+  <rect x="150" y="405" width="190" height="48" fill="#C9A66B"/>
+  <text x="192" y="434" fill="#111715" font-family="sans-serif" font-size="13" font-weight="bold" letter-spacing="1.5">WATCH NOW</text>
+  <rect x="360" y="405" width="190" height="48" fill="none" stroke="#F4F0E7" stroke-width="1.5"/>
+  <text x="405" y="434" fill="#F4F0E7" font-family="sans-serif" font-size="13" letter-spacing="1.5">VIEW DETAILS</text>
+  <!-- Curated Catalog Row -->
+  <text x="90" y="585" fill="#F4F0E7" font-family="Georgia, serif" font-size="24">Curated Selection</text>
+  <g>
+    <rect x="90" y="610" width="330" height="220" fill="#15231F" stroke="#263B35" stroke-width="1"/>
+    <rect x="114" y="634" width="282" height="115" fill="#102B25"/>
+    <text x="114" y="780" fill="#F4F0E7" font-family="Georgia, serif" font-size="20">Nocturne in Colombo</text>
+    <text x="114" y="805" fill="#C9A66B" font-family="monospace" font-size="12">DRAMA · 2026 · 4K HDR</text>
+
+    <rect x="453" y="610" width="330" height="220" fill="#15231F" stroke="#263B35" stroke-width="1"/>
+    <rect x="477" y="634" width="282" height="115" fill="#1A3A32"/>
+    <text x="477" y="780" fill="#F4F0E7" font-family="Georgia, serif" font-size="20">The Tea Estate Chronicles</text>
+    <text x="477" y="805" fill="#C9A66B" font-family="monospace" font-size="12">DOCUMENTARY · 6 EPISODES</text>
+
+    <rect x="816" y="610" width="330" height="220" fill="#15231F" stroke="#263B35" stroke-width="1"/>
+    <rect x="840" y="634" width="282" height="115" fill="#102B25"/>
+    <text x="840" y="780" fill="#F4F0E7" font-family="Georgia, serif" font-size="20">Glass Harbor</text>
+    <text x="840" y="805" fill="#C9A66B" font-family="monospace" font-size="12">THRILLER · 2025 · LOSSLESS</text>
+
+    <rect x="1180" y="610" width="330" height="220" fill="#15231F" stroke="#263B35" stroke-width="1"/>
+    <rect x="1204" y="634" width="282" height="115" fill="#1A3A32"/>
+    <text x="1204" y="780" fill="#F4F0E7" font-family="Georgia, serif" font-size="20">Solaris Meridian</text>
+    <text x="1204" y="805" fill="#C9A66B" font-family="monospace" font-size="12">SCI-FI · ANTHOLOGY</text>
+  </g>
+</svg>

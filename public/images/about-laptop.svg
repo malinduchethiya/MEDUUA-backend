@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="woodDesk" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#241a14"/>
+      <stop offset="50%" stop-color="#1a120e"/>
+      <stop offset="100%" stop-color="#0f0b09"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="450" fill="#090e0c"/>
+  <!-- Wooden Table Surface -->
+  <polygon points="0,220 600,220 600,450 0,450" fill="url(#woodDesk)"/>
+  <line x1="0" y1="220" x2="600" y2="220" stroke="#3d2a1e" stroke-width="2"/>
+
+  <!-- Laptop Lid -->
+  <polygon points="140,80 460,80 490,300 110,300" fill="#1c2522" stroke="#2e3d37" stroke-width="2"/>
+  <!-- Screen Area -->
+  <polygon points="152,92 448,92 476,288 124,288" fill="#0b110f"/>
+
+  <!-- Laptop Display Content: "Build. Create. Improve. Together." -->
+  <g>
+    <text x="300" y="150" fill="#f4f0e7" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle">Build</text>
+    <text x="300" y="185" fill="#f4f0e7" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle">Create</text>
+    <text x="300" y="220" fill="#f4f0e7" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle">Improve</text>
+    <text x="300" y="255" fill="#c9a66b" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="bold" text-anchor="middle">Together.</text>
+  </g>
+
+  <!-- Laptop Base -->
+  <polygon points="110,300 490,300 535,370 65,370" fill="#18221e" stroke="#2d3a34" stroke-width="2"/>
+  <polygon points="65,370 535,370 535,378 65,378" fill="#0c1210"/>
+  <!-- Trackpad -->
+  <polygon points="250,325 350,325 356,362 244,362" fill="#101715" stroke="#222e29" stroke-width="1"/>
+</svg>
