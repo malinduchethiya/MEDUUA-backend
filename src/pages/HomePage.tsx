@@ -12,6 +12,8 @@ import {
 import { usePortfolio } from '../context/PortfolioContext';
 import { PageRoute } from '../components/Layout';
 import { DEFAULT_PROJECTS } from '../data/defaultData';
+import { SvgSphereAnimation } from '../components/SvgSphereAnimation';
+import { PinnedFeaturedProjects } from '../components/PinnedFeaturedProjects';
 
 interface HomePageProps {
   onNavigate: (page: PageRoute, projectSlug?: string) => void;
@@ -19,6 +21,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const { projects } = usePortfolio();
+  const archiveGridRef = React.useRef<HTMLElement | null>(null);
 
   // Exactly 16 projects arranged in 4 columns and 4 rows as requested
   const displayedProjects = React.useMemo(() => {
@@ -38,6 +41,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     }
     return list.slice(0, 16);
   }, [projects]);
+
+  // Featured projects for the GSAP ScrollTrigger pinned showcase (6 flagship projects)
+  const featuredShowcaseProjects = React.useMemo(() => {
+    const featured = projects.filter((p) => p.featured);
+    if (featured.length >= 4) {
+      return featured.slice(0, 6);
+    }
+    return displayedProjects.slice(0, 6);
+  }, [projects, displayedProjects]);
+
+  const handleScrollToGrid = () => {
+    if (archiveGridRef.current) {
+      archiveGridRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const capabilities = [
     { label: 'Web Development', icon: Monitor },
@@ -101,15 +119,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Column: 3D Laptop and 3 Phones Showcase */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative mx-auto max-w-lg lg:max-w-none rounded-xl overflow-hidden shadow-2xl">
-                <img
-                  src="/assets/extracted/hero_devices_showcase.png"
-                  alt="MEDUUA Digital Showcase — Laptop and Mobile Ecosystem"
-                  className="w-full h-auto object-cover transform hover:scale-[1.01] transition-transform duration-300"
-                />
-              </div>
+            {/* Right Column: CodePen Home SVG Sphere Animation with anime.js */}
+            <div className="lg:col-span-6 relative flex items-center justify-center">
+              <SvgSphereAnimation />
             </div>
           </div>
 
@@ -133,14 +145,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 01B — Featured Work / Selected Projects (Warm Ivory Background matching Screen 01) */}
-      <section className="bg-[#f5f2eb] text-[#111715] py-16 lg:py-24">
+      {/* 01A — GSAP ScrollTrigger Pinned Featured Projects Showcase (starts right when end of Hero hits top of screen) */}
+      <PinnedFeaturedProjects
+        projects={featuredShowcaseProjects}
+        onNavigate={onNavigate}
+        onScrollToGrid={handleScrollToGrid}
+      />
+
+      {/* 01B — Complete Selected Projects Archive (4-Column x 4-Row Grid, resumes after pin releases) */}
+      <section ref={archiveGridRef} className="bg-[#f5f2eb] text-[#111715] py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 space-y-10">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#111715]/15">
             <div className="space-y-2 max-w-2xl">
               <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#64748b]">
-                <span>Featured Work</span>
+                <span>Complete Index</span>
                 <span className="w-8 h-[1px] bg-[#64748b]/40" />
               </div>
               <h2 className="font-serif-editorial text-3xl sm:text-5xl font-bold tracking-tight text-[#111715]">
