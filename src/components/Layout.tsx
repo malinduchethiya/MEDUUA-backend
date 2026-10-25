@@ -99,39 +99,8 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
             })}
           </nav>
 
-          {/* Right Action Buttons: Admin Portal + Start a Project + Mobile Toggle */}
-          <div className="flex items-center gap-2.5 shrink-0">
-            {/* Desktop & Tablet Admin Portal Quick Button */}
-            <button
-              type="button"
-              onClick={() => handleNav('admin')}
-              title="Open Admin Dashboard"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#cbd5e1] hover:text-[#c9a66b] bg-[#13201b] border border-[#23382f] hover:border-[#c9a66b]/60 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
-            >
-              <LayoutDashboard className="w-3.5 h-3.5 text-[#c9a66b]" />
-              <span>Admin</span>
-              {inquiries.length > 0 && (
-                <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#c9a66b] text-[#0b1210] font-bold">
-                  {inquiries.length}
-                </span>
-              )}
-              {isAdmin && (
-                <span
-                  className="w-1.5 h-1.5 rounded-full bg-emerald-400"
-                  title="Signed in as verified Admin"
-                />
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleNav('contact')}
-              className="px-3.5 sm:px-4 py-2 text-xs font-semibold tracking-wide bg-[#c9a66b] text-[#0b1210] rounded-lg hover:bg-[#d8b77e] transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm whitespace-nowrap shrink-0"
-            >
-              <span>Start a Project</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-
+          {/* Right Action Buttons: Mobile Toggle */}
+          <div className="flex items-center gap-2.5 shrink-0 md:hidden">
             {/* Mobile Hamburger Menu Button */}
             <button
               type="button"

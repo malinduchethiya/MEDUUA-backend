@@ -103,7 +103,7 @@ service cloud.firestore {
       data.price is string && data.price.size() >= 2 && data.price.size() <= 60 &&
       data.subtitle is string && data.subtitle.size() >= 4 && data.subtitle.size() <= 160 &&
       data.description is string && data.description.size() >= 10 && data.description.size() <= 500 &&
-      data.features is list && data.features.size() >= 1 && data.features.size() <= 12 && data.features[0] is string && data.features[0].size() <= 160 &&
+      data.features is list && data.features.size() >= 1 && data.features.size() <= 20 && data.features[0] is string && data.features[0].size() <= 160 &&
       data.highlighted is bool &&
       data.deliveryTime is string && data.deliveryTime.size() >= 2 && data.deliveryTime.size() <= 80 &&
       data.buttonText is string && data.buttonText.size() >= 2 && data.buttonText.size() <= 60 &&

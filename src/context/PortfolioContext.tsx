@@ -55,8 +55,8 @@ interface PortfolioContextValue {
 
 const PortfolioContext = createContext<PortfolioContextValue | undefined>(undefined);
 
-const FIXED_PRICING_STORAGE_KEY = 'meduua_fixed_pricing_v2';
-const FIXED_PRICING_BASELINE_DATE = '2026-10-25T00:00:00.000Z';
+const FIXED_PRICING_STORAGE_KEY = 'meduua_fixed_pricing_v3';
+const FIXED_PRICING_BASELINE_DATE = '2026-10-25T12:00:00.000Z';
 
 function loadMergedFixedPricing(remoteDocs?: PricingTierItem[]): PricingTierItem[] {
   let localMap: Record<string, PricingTierItem> = {};
@@ -442,17 +442,17 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const features = (tier.features || [])
       .map((f) => f.trim().slice(0, 160))
       .filter(Boolean)
-      .slice(0, 12);
+      .slice(0, 20);
     if (features.length === 0) features.push('Responsive custom website design');
 
     const payload = {
-      name: clampStr(tier.name, 2, 80, 'Fixed Package'),
-      price: clampStr(tier.price, 2, 60, 'LKR 25,000'),
+      name: clampStr(tier.name, 2, 80, 'STARTER'),
+      price: clampStr(tier.price, 2, 60, 'LKR 10,000'),
       subtitle: clampStr(
         tier.subtitle,
         4,
         160,
-        'Tailored fixed-scope development package by MEDUUA.'
+        'Perfect for individuals, freelancers, and small businesses taking their first step online.'
       ),
       description: clampStr(
         tier.description,
@@ -462,14 +462,18 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       ),
       features,
       highlighted: Boolean(tier.highlighted),
-      deliveryTime: clampStr(tier.deliveryTime, 2, 80, '7–10 Business Days'),
-      buttonText: clampStr(tier.buttonText, 2, 60, 'Choose Package'),
+      deliveryTime: clampStr(tier.deliveryTime, 2, 80, '3–5 working days'),
+      buttonText: clampStr(tier.buttonText, 2, 60, 'GET STARTED'),
       order: Number.isFinite(tier.order) ? Number(tier.order) : 1,
       updatedAt: new Date().toISOString(),
     };
 
     const finalItem: PricingTierItem = {
       id: docId,
+      number: tier.number,
+      tagline: tier.tagline,
+      featuresHeading: tier.featuresHeading,
+      bestFor: tier.bestFor,
       ...payload,
     };
 
@@ -478,7 +482,11 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       let nextList: PricingTierItem[];
       if (idx >= 0) {
         const copy = [...prev];
-        copy[idx] = { ...finalItem, order: copy[idx].order };
+        copy[idx] = {
+          ...copy[idx],
+          ...finalItem,
+          order: copy[idx].order,
+        };
         nextList = copy.sort((a, b) => a.order - b.order);
       } else {
         nextList = [...prev, finalItem].sort((a, b) => a.order - b.order);
@@ -516,7 +524,14 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     if (isAdmin) {
       for (const tier of freshDefaults) {
-        const { id, ...payload } = tier;
+        const {
+          id,
+          number: _num,
+          tagline: _tag,
+          featuresHeading: _fh,
+          bestFor: _bf,
+          ...payload
+        } = tier;
         try {
           await setDoc(doc(db, 'pricing', id), payload);
         } catch (error) {

@@ -221,7 +221,7 @@
         },
         "features": {
           "type": "array",
-          "description": "Included package features (up to 12 items)"
+          "description": "Included package features (up to 20 items)"
         },
         "highlighted": {
           "type": "boolean",

@@ -9,9 +9,15 @@ import {
   X,
   Save,
   CheckCircle2,
+  Info,
+  Sparkles,
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { PricingTierItem } from '../data/defaultData';
+import {
+  CUSTOM_DEVELOPMENT_SOLUTIONS,
+  IMPORTANT_PACKAGE_INFORMATION,
+  PricingTierItem,
+} from '../data/defaultData';
 import { PageRoute } from '../components/Layout';
 import { getWhatsAppUrl } from '../firebase';
 
@@ -63,14 +69,14 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         features:
           parsedFeatures.length > 0
             ? parsedFeatures
-            : ['Custom Responsive Design & Engineering'],
+            : ['Modern, professional website design'],
         updatedAt: new Date().toISOString(),
       });
       setEditingTier(null);
       showToast(
         isAdmin
           ? `"${editingTier.name}" saved & synced to Cloud Firestore.`
-          : `"${editingTier.name}" updated in Fixed Packages.`
+          : `"${editingTier.name}" updated.`
       );
     } finally {
       setSaving(false);
@@ -79,13 +85,13 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
 
   const handleResetSingle = async (tier: PricingTierItem) => {
     await resetSinglePricingTier(tier.id);
-    showToast(`Reset Fixed Package #${tier.order} to default values.`);
+    showToast(`Reset 0${tier.order}. ${tier.name} to default values.`);
   };
 
   const handleResetAllConfirmed = async () => {
     await resetPricingToDefaults();
     setConfirmResetAll(false);
-    showToast('All 6 Fixed Packages restored to default studio specifications.');
+    showToast('All Website Development Packages restored to default specifications.');
   };
 
   return (
@@ -101,24 +107,23 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold tracking-[0.22em] uppercase text-[#a3b899]">
-              <span>Fixed-Scope Packages</span>
+              <span>MEDUUA</span>
               <span className="text-[#c9a66b]">—</span>
-              <span>Transparent Studio Pricing</span>
+              <span>Website Development Packages</span>
             </div>
 
             <h1 className="font-serif-editorial text-4xl sm:text-6xl lg:text-[4.5rem] font-bold tracking-tight text-[#f5f2eb] leading-[1.08]">
-              Fixed Digital<br />
+              Website Development<br />
               <span className="text-[#c9a66b]">Packages.</span>
             </h1>
 
             <p className="text-sm sm:text-base text-[#94a3b8] max-w-2xl leading-relaxed">
-              Clear, fixed-price packages for websites, e-commerce stores, native Android apps, and
-              full-stack software. Every package includes fixed deliverables and timelines—and can be
-              customized or edited anytime.
+              Transparent starting packages crafted for individuals, growing businesses, and
+              established brands—plus bespoke custom development tailored to your goals.
             </p>
           </div>
 
-          {/* Interactive Edit Fixed Packages Controls */}
+          {/* Interactive Edit Packages Controls */}
           <div className="flex flex-wrap items-center gap-3 shrink-0">
             <button
               type="button"
@@ -130,14 +135,14 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               }`}
             >
               <Edit2 className="w-3.5 h-3.5" />
-              <span>{editMode ? 'Done Editing Packages' : 'Edit Fixed Packages'}</span>
+              <span>{editMode ? 'Done Editing Packages' : 'Edit Packages'}</span>
             </button>
 
             {editMode && (
               <>
                 {confirmResetAll ? (
                   <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1a1212] border border-red-500/40 text-xs">
-                    <span className="text-red-200 font-semibold">Reset all 6 packages?</span>
+                    <span className="text-red-200 font-semibold">Reset all packages?</span>
                     <button
                       type="button"
                       onClick={handleResetAllConfirmed}
@@ -188,26 +193,27 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
         </div>
       )}
 
-      {/* 05B — 6 Fixed Packages Grid (Editable) */}
+      {/* 05B — 3 Website Development Packages Grid */}
       <section className="bg-[#f5f2eb] text-[#111715] py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-6 space-y-10">
+        <div className="max-w-7xl mx-auto px-6 space-y-14">
           {/* Top Bar Info */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5dfd3]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-[#e5dfd3]">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#64748b]">
-                6 Fixed Studio Packages · Click Edit on Any Package to Customize
+                MEDUUA — Website Development Packages
               </p>
             </div>
             <div className="flex items-center gap-2 text-xs text-[#475569]">
               <ShieldCheck className="w-4 h-4 text-[#c9a66b]" />
-              <span>Fixed Scope · No Hidden Fees · Source Code Included</span>
+              <span>Starting Prices in Sri Lankan Rupees (LKR)</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
             {pricing.map((tier, idx) => {
               const isHighlighted = tier.highlighted;
-              const inquiryMsg = `Hello MEDUUA, I would like to get started with the fixed package: ${tier.name} (${tier.price}).`;
+              const numLabel = tier.number || `0${idx + 1}`;
+              const inquiryMsg = `Hello MEDUUA, I would like to inquire about the ${numLabel}. ${tier.name} — ${tier.price} package.`;
 
               return (
                 <div
@@ -218,20 +224,20 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                       : 'bg-[#ffffff] text-[#111715] border border-[#e5dfd3] shadow-sm hover:shadow-xl hover:border-[#c9a66b]'
                   }`}
                 >
-                  {/* Top Right Status / Edit Controls */}
+                  {/* Top Bar: Package Number & Edit Control */}
                   <div className="flex items-center justify-between gap-2 mb-5">
                     <span
-                      className={`text-[10px] font-mono-tabular uppercase tracking-widest font-bold ${
-                        isHighlighted ? 'text-[#a3b899]' : 'text-[#64748b]'
+                      className={`text-xs font-mono-tabular uppercase tracking-widest font-bold ${
+                        isHighlighted ? 'text-[#c9a66b]' : 'text-[#64748b]'
                       }`}
                     >
-                      FIXED PACKAGE 0{idx + 1}
+                      {numLabel}. {tier.name} — {tier.price}
                     </span>
 
                     <div className="flex items-center gap-2">
                       {isHighlighted && (
                         <span className="px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#c9a66b] text-[#0b1210] rounded">
-                          Most Popular
+                          Popular
                         </span>
                       )}
 
@@ -269,17 +275,19 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="space-y-5 flex-1">
-                    {/* Package Name & Fixed Price */}
-                    <div className="space-y-2">
-                      <h2
-                        className={`font-serif-editorial text-xl sm:text-2xl font-bold ${
-                          isHighlighted ? 'text-[#f5f2eb]' : 'text-[#111715]'
-                        }`}
-                      >
-                        {tier.name}
-                      </h2>
+                    {/* Package Name, Price, Tagline & Subtitle */}
+                    <div className="space-y-2.5">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <h2
+                          className={`font-serif-editorial text-2xl sm:text-3xl font-bold ${
+                            isHighlighted ? 'text-[#f5f2eb]' : 'text-[#111715]'
+                          }`}
+                        >
+                          {numLabel}. {tier.name}
+                        </h2>
+                      </div>
 
-                      <div className="flex items-baseline gap-2 pt-1">
+                      <div className="flex items-baseline gap-2">
                         <p
                           className={`font-serif-editorial text-3xl sm:text-4xl font-bold tracking-tight ${
                             isHighlighted ? 'text-[#c9a66b]' : 'text-[#111715]'
@@ -287,17 +295,20 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                         >
                           {tier.price}
                         </p>
-                        <span
-                          className={`text-[11px] font-medium ${
-                            isHighlighted ? 'text-[#94a3b8]' : 'text-[#64748b]'
-                          }`}
-                        >
-                          / fixed price
-                        </span>
                       </div>
 
+                      {tier.tagline && (
+                        <p
+                          className={`text-xs sm:text-sm font-bold leading-snug pt-1 ${
+                            isHighlighted ? 'text-[#f5f2eb]' : 'text-[#111715]'
+                          }`}
+                        >
+                          {tier.tagline}
+                        </p>
+                      )}
+
                       <p
-                        className={`text-xs leading-relaxed pt-1 ${
+                        className={`text-xs leading-relaxed ${
                           isHighlighted ? 'text-[#cbd5e1]' : 'text-[#475569]'
                         }`}
                       >
@@ -305,61 +316,89 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                       </p>
                     </div>
 
-                    {/* Delivery Timeline */}
+                    {/* Included Features List */}
                     <div
-                      className={`flex items-center gap-2 text-xs py-2 px-3 rounded-xl border ${
-                        isHighlighted
-                          ? 'bg-[#14241e] border-[#233b32] text-[#cbd5e1]'
-                          : 'bg-[#f8f6f0] border-[#e5dfd3] text-[#334155]'
-                      }`}
-                    >
-                      <Clock className="w-3.5 h-3.5 text-[#c9a66b] shrink-0" />
-                      <span className="font-medium">Delivery: {tier.deliveryTime}</span>
-                    </div>
-
-                    {/* Features / Deliverables List */}
-                    <div
-                      className={`pt-4 border-t space-y-3 ${
+                      className={`pt-4 border-t space-y-2.5 ${
                         isHighlighted ? 'border-[#223830]' : 'border-[#111715]/10'
                       }`}
                     >
                       <p
-                        className={`text-[10px] font-bold uppercase tracking-wider ${
-                          isHighlighted ? 'text-[#94a3b8]' : 'text-[#64748b]'
+                        className={`text-[11px] font-bold uppercase tracking-wider ${
+                          isHighlighted ? 'text-[#c9a66b]' : 'text-[#111715]'
                         }`}
                       >
-                        Included Fixed Deliverables:
+                        {tier.featuresHeading || 'Included Features'}
                       </p>
-                      {tier.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-start gap-2.5 text-xs">
-                          <span className="w-4 h-4 rounded-full bg-[#c9a66b]/20 text-[#c9a66b] flex items-center justify-center shrink-0 mt-0.5">
-                            <Check className="w-2.5 h-2.5 stroke-[3]" />
-                          </span>
+                      <div className="space-y-2 pt-1">
+                        {tier.features.map((feat, fIdx) => (
+                          <div key={fIdx} className="flex items-start gap-2.5 text-xs">
+                            <span className="w-4 h-4 rounded-full bg-[#c9a66b]/20 text-[#c9a66b] flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="w-2.5 h-2.5 stroke-[3]" />
+                            </span>
+                            <span
+                              className={`font-medium leading-snug ${
+                                isHighlighted ? 'text-[#e2e8f0]' : 'text-[#334155]'
+                              }`}
+                            >
+                              {feat}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Estimated Delivery & Best For */}
+                    <div
+                      className={`pt-4 border-t space-y-3 text-xs ${
+                        isHighlighted ? 'border-[#223830]' : 'border-[#111715]/10'
+                      }`}
+                    >
+                      <div
+                        className={`flex items-center gap-2 py-2 px-3 rounded-xl border ${
+                          isHighlighted
+                            ? 'bg-[#14241e] border-[#233b32] text-[#cbd5e1]'
+                            : 'bg-[#f8f6f0] border-[#e5dfd3] text-[#334155]'
+                        }`}
+                      >
+                        <Clock className="w-3.5 h-3.5 text-[#c9a66b] shrink-0" />
+                        <span>
+                          <strong className={isHighlighted ? 'text-[#f5f2eb]' : 'text-[#111715]'}>
+                            Estimated Delivery:
+                          </strong>{' '}
+                          {tier.deliveryTime}
+                        </span>
+                      </div>
+
+                      {tier.bestFor && (
+                        <div className="leading-relaxed">
                           <span
-                            className={`font-medium leading-snug ${
-                              isHighlighted ? 'text-[#e2e8f0]' : 'text-[#334155]'
+                            className={`font-bold ${
+                              isHighlighted ? 'text-[#f5f2eb]' : 'text-[#111715]'
                             }`}
                           >
-                            {feat}
+                            Best For:{' '}
+                          </span>
+                          <span className={isHighlighted ? 'text-[#cbd5e1]' : 'text-[#475569]'}>
+                            {tier.bestFor}
                           </span>
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="pt-7 space-y-2">
+                  {/* Action Button */}
+                  <div className="pt-7">
                     <a
                       href={getWhatsAppUrl(inquiryMsg)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`w-full py-3.5 px-4 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
+                      className={`w-full py-3.5 px-4 text-xs font-bold tracking-wider uppercase rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
                         isHighlighted
                           ? 'bg-[#c9a66b] text-[#0b1210] hover:bg-[#d8b77e]'
                           : 'bg-[#111715] text-[#f5f2eb] hover:bg-[#c9a66b] hover:text-[#0b1210]'
                       }`}
                     >
-                      <span>{tier.buttonText || 'Choose Package'}</span>
+                      <span>{tier.buttonText || 'GET STARTED'}</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
                   </div>
@@ -367,48 +406,76 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               );
             })}
           </div>
-        </div>
-      </section>
 
-      {/* 05C — Bottom Dark Banner: Need a Custom Solution? */}
-      <section className="relative overflow-hidden bg-[#0b1210] border-t border-[#1b2b24] py-16 lg:py-20 text-[#f5f2eb]">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity pointer-events-none"
-          style={{ backgroundImage: `url('/assets/extracted/pricing_custom_banner.png')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0b1210] via-[#0b1210]/90 to-[#0b1210]/70 pointer-events-none" />
+          {/* 05C — CUSTOM DEVELOPMENT — Request a Quote */}
+          <div className="rounded-3xl bg-[#0e1915] text-[#f5f2eb] border border-[#23382f] p-8 sm:p-10 lg:p-12 shadow-2xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="lg:col-span-5 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono-tabular uppercase tracking-widest text-[#c9a66b] font-bold">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>CUSTOM DEVELOPMENT — Request a Quote</span>
+                </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-5">
-          <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.22em] uppercase text-[#a3b899]">
-            <span>Have a Unique Idea?</span>
+                <h2 className="font-serif-editorial text-2xl sm:text-4xl font-bold text-[#f5f2eb] leading-tight">
+                  Your ideas shouldn&apos;t be limited to a package.
+                </h2>
+
+                <p className="text-sm text-[#cbd5e1] font-medium">
+                  Need something beyond a conventional business website?
+                </p>
+
+                <p className="text-xs sm:text-sm text-[#94a3b8] leading-relaxed">
+                  Pricing depends on the functionality, complexity, integrations, and development
+                  requirements.
+                </p>
+
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('contact')}
+                    className="px-6 py-3.5 bg-[#c9a66b] text-[#0b1210] text-xs font-bold tracking-wider uppercase rounded-xl hover:bg-[#d8b77e] transition-colors inline-flex items-center gap-2 cursor-pointer shadow-lg whitespace-nowrap"
+                  >
+                    <span>REQUEST A CUSTOM QUOTE</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 bg-[#13221c] border border-[#233b32] rounded-2xl p-6 sm:p-8 space-y-4">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#c9a66b]">
+                  MEDUUA can discuss custom solutions including:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {CUSTOM_DEVELOPMENT_SOLUTIONS.map((item) => (
+                    <div key={item} className="flex items-start gap-2.5 text-xs sm:text-sm">
+                      <span className="w-4 h-4 rounded-full bg-[#c9a66b]/20 text-[#c9a66b] flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
+                      </span>
+                      <span className="text-[#e2e8f0] font-medium">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
-          <h2 className="font-serif-editorial text-3xl sm:text-5xl font-bold tracking-tight text-[#f5f2eb]">
-            Need a <span className="text-[#c9a66b]">Custom Solution?</span>
-          </h2>
+          {/* 05D — Important Package Information */}
+          <div className="rounded-2xl bg-[#ffffff] border border-[#e5dfd3] p-6 sm:p-8 space-y-4">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#111715]">
+              <Info className="w-4 h-4 text-[#c9a66b] shrink-0" />
+              <h3 className="font-serif-editorial text-lg sm:text-xl font-bold text-[#111715]">
+                Important Package Information
+              </h3>
+            </div>
 
-          <p className="text-sm sm:text-base text-[#94a3b8] max-w-2xl leading-relaxed">
-            We also build tailor-made enterprise platforms and custom software architectures. Or
-            click &ldquo;Edit&rdquo; on any fixed package above to adjust its pricing and scope.
-          </p>
-
-          <div className="pt-2 flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={() => onNavigate('contact')}
-              className="px-6 py-3.5 bg-[#c9a66b] text-[#0b1210] text-xs font-bold rounded-lg hover:bg-[#d8b77e] transition-colors flex items-center gap-2 cursor-pointer shadow-lg whitespace-nowrap"
-            >
-              <span>Request a Custom Quote</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setEditMode(true)}
-              className="px-5 py-3.5 bg-[#13201b] border border-[#263c33] hover:border-[#c9a66b] text-[#f5f2eb] text-xs font-semibold rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
-            >
-              <Edit2 className="w-3.5 h-3.5 text-[#c9a66b]" />
-              <span>Customize Fixed Packages</span>
-            </button>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5 text-xs text-[#475569] leading-relaxed">
+              {IMPORTANT_PACKAGE_INFORMATION.map((note, idx) => (
+                <li key={idx} className="flex items-start gap-2.5">
+                  <span className="text-[#c9a66b] font-bold shrink-0">•</span>
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -420,10 +487,10 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
             <div className="flex items-center justify-between border-b border-[#e2dcd0] pb-4">
               <div>
                 <span className="text-[10px] font-mono-tabular uppercase tracking-widest text-[#64748b] font-bold">
-                  EDIT FIXED PACKAGE #{editingTier.order}
+                  EDIT PACKAGE 0{editingTier.order}
                 </span>
                 <h2 className="font-serif-editorial text-2xl font-bold text-[#111715]">
-                  {editingTier.name}
+                  {editingTier.name} — {editingTier.price}
                 </h2>
               </div>
               <button
@@ -451,7 +518,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#111715]">Fixed Price *</label>
+                  <label className="font-bold text-[#111715]">Price *</label>
                   <input
                     type="text"
                     required
@@ -459,7 +526,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                     onChange={(e) =>
                       setEditingTier({ ...editingTier, price: e.target.value })
                     }
-                    placeholder="e.g. LKR 45,000 or $450"
+                    placeholder="e.g. LKR 10,000"
                     className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-xl text-xs focus:outline-none focus:border-[#c9a66b]"
                   />
                 </div>
@@ -467,7 +534,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-[#111715]">Delivery Timeline *</label>
+                  <label className="font-bold text-[#111715]">Estimated Delivery *</label>
                   <input
                     type="text"
                     required
@@ -475,13 +542,13 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                     onChange={(e) =>
                       setEditingTier({ ...editingTier, deliveryTime: e.target.value })
                     }
-                    placeholder="e.g. 10–14 Business Days"
+                    placeholder="e.g. 3–5 working days"
                     className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-xl text-xs focus:outline-none focus:border-[#c9a66b]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-[#111715]">CTA Button Text *</label>
+                  <label className="font-bold text-[#111715]">Button Text *</label>
                   <input
                     type="text"
                     required
@@ -489,10 +556,22 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                     onChange={(e) =>
                       setEditingTier({ ...editingTier, buttonText: e.target.value })
                     }
-                    placeholder="e.g. Choose Business Package"
+                    placeholder="e.g. GET STARTED"
                     className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-xl text-xs focus:outline-none focus:border-[#c9a66b]"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="font-bold text-[#111715]">Bold Tagline</label>
+                <input
+                  type="text"
+                  value={editingTier.tagline || ''}
+                  onChange={(e) =>
+                    setEditingTier({ ...editingTier, tagline: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-xl text-xs focus:outline-none focus:border-[#c9a66b]"
+                />
               </div>
 
               <div className="space-y-1">
@@ -509,11 +588,23 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
               </div>
 
               <div className="space-y-1">
+                <label className="font-bold text-[#111715]">Best For</label>
+                <input
+                  type="text"
+                  value={editingTier.bestFor || ''}
+                  onChange={(e) =>
+                    setEditingTier({ ...editingTier, bestFor: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-xl text-xs focus:outline-none focus:border-[#c9a66b]"
+                />
+              </div>
+
+              <div className="space-y-1">
                 <label className="font-bold text-[#111715]">
-                  Included Fixed Deliverables (One per line) *
+                  Included Features (One per line) *
                 </label>
                 <textarea
-                  rows={6}
+                  rows={8}
                   required
                   value={featuresText}
                   onChange={(e) => setFeaturesText(e.target.value)}
@@ -531,7 +622,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                     }
                     className="rounded border-[#d6cfc0] text-[#c9a66b]"
                   />
-                  <span>Highlight as &ldquo;Most Popular&rdquo; Dark Gold Card</span>
+                  <span>Highlight as Dark Gold Card</span>
                 </label>
 
                 <button
@@ -543,7 +634,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   className="text-[11px] font-semibold text-[#64748b] hover:text-[#111715] flex items-center gap-1 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset Slot Default</span>
+                  <span>Reset Default</span>
                 </button>
               </div>
 
@@ -561,7 +652,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                   className="px-5 py-2.5 bg-[#c9a66b] text-[#0b1210] font-bold rounded-xl hover:bg-[#d8b77e] flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
                   <Save className="w-3.5 h-3.5" />
-                  <span>{saving ? 'Saving...' : 'Save Fixed Package'}</span>
+                  <span>{saving ? 'Saving...' : 'Save Package'}</span>
                 </button>
               </div>
             </form>
@@ -571,4 +662,3 @@ export const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     </div>
   );
 };
-

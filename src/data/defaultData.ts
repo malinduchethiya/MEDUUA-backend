@@ -44,13 +44,17 @@ export interface ServiceItem {
 
 export interface PricingTierItem {
   id: string;
+  number?: string;
   name: string;
   price: string;
+  tagline?: string;
   subtitle: string;
   description: string;
+  featuresHeading?: string;
   features: string[];
   highlighted: boolean;
   deliveryTime: string;
+  bestFor?: string;
   buttonText: string;
   order: number;
   updatedAt: string;
@@ -654,129 +658,132 @@ export const DEFAULT_SERVICES: ServiceItem[] = [
 export const DEFAULT_PRICING: PricingTierItem[] = [
   {
     id: 'pricing-starter',
-    name: 'Starter Website Package',
-    price: 'LKR 25,000',
-    subtitle: 'Fixed-scope launch website for startups, personal brands, and local businesses.',
+    number: '01',
+    name: 'STARTER',
+    price: 'LKR 10,000',
+    tagline: 'Your business deserves a professional online presence.',
+    subtitle:
+      'Perfect for individuals, freelancers, and small businesses taking their first step online.',
     description:
-      'Complete 5-page responsive website with bespoke UI design, mobile optimization, direct WhatsApp & inquiry form integration, and foundational SEO.',
+      'Your business deserves a professional online presence. Perfect for individuals, freelancers, and small businesses taking their first step online.',
+    featuresHeading: 'Included Features',
     features: [
-      '5 Custom-Designed Responsive Pages',
-      'Mobile, Tablet & Desktop Optimization',
-      'Direct WhatsApp & Inquiry Form Setup',
-      'Foundational On-Page SEO & Speed Setup',
-      'SSL Security & Custom Domain Configuration',
-      '2 Revision Rounds + 1 Month Support',
+      'Up to 5 website pages',
+      'Modern, professional website design',
+      'Fully mobile, tablet, and desktop responsive',
+      'Home, About, Services, Contact, and one additional page',
+      'WhatsApp contact integration',
+      'Basic contact form',
+      'Social media links',
+      'Image gallery or portfolio section',
+      'Basic SEO setup',
+      'Mobile navigation menu',
+      'Basic performance optimization',
+      'Deployment assistance',
+      '7 days of post-launch bug-fix support',
     ],
     highlighted: false,
-    deliveryTime: '5–7 Business Days',
-    buttonText: 'Choose Starter Package',
+    deliveryTime: '3–5 working days',
+    bestFor:
+      'Small shops, personal brands, freelancers, local services, and startup landing websites.',
+    buttonText: 'GET STARTED',
     order: 1,
-    updatedAt: '2026-10-25T00:00:00.000Z',
+    updatedAt: '2026-10-25T12:00:00.000Z',
   },
   {
     id: 'pricing-business',
-    name: 'Business Growth Package',
-    price: 'LKR 45,000',
-    subtitle: 'Ideal for growing companies needing a high-converting corporate website & CMS.',
+    number: '02',
+    name: 'BUSINESS',
+    price: 'LKR 15,000',
+    tagline: 'A stronger digital presence for growing businesses.',
+    subtitle:
+      'Designed for businesses that need more pages, greater flexibility, and interactive features.',
     description:
-      'Up to 12 dynamic pages with an easy-to-manage Admin CMS dashboard, portfolio or blog publishing, Google Maps & analytics, and speed optimization.',
+      'A stronger digital presence for growing businesses. Designed for businesses that need more pages, greater flexibility, and interactive features.',
+    featuresHeading: 'Everything in Starter, plus:',
     features: [
-      'Up to 12 Custom Pages + Admin CMS Panel',
-      'Bespoke Editorial UI/UX Design System',
-      'Blog, News or Portfolio Management',
-      'Advanced Technical SEO & Core Web Vitals 95+',
-      'Google Maps, Analytics & Social Integration',
-      '3 Revision Rounds + 3 Months Priority Support',
+      'Up to 7 website pages',
+      'Customized premium UI/UX design',
+      'Advanced responsive layouts',
+      'Interactive animations and transitions',
+      'Product or service showcase',
+      'Portfolio or project gallery',
+      'Google Maps integration',
+      'Enhanced contact and inquiry forms',
+      'Testimonials section (using genuine reviews)',
+      'FAQ section',
+      'Basic content management for agreed sections',
+      'Improved on-page SEO',
+      'Performance optimization',
+      'Deployment assistance',
+      '14 days of post-launch bug-fix support',
     ],
     highlighted: true,
-    deliveryTime: '10–14 Business Days',
-    buttonText: 'Choose Business Package',
+    deliveryTime: '5–8 working days',
+    bestFor:
+      'Restaurants, salons, agencies, educational services, professional businesses, and growing brands.',
+    buttonText: 'CHOOSE BUSINESS',
     order: 2,
-    updatedAt: '2026-10-25T00:00:00.000Z',
+    updatedAt: '2026-10-25T12:00:00.000Z',
   },
   {
     id: 'pricing-premium',
-    name: 'E-Commerce & Booking Package',
-    price: 'LKR 75,000',
-    subtitle: 'Complete online store or reservation system with payment gateway & order admin.',
+    number: '03',
+    name: 'PREMIUM',
+    price: 'LKR 20,000',
+    tagline: 'A distinctive website, tailored to your business.',
+    subtitle:
+      'Built for customers who need a more personalized, visually impressive, and feature-rich online presence.',
     description:
-      'Full commercial storefront with product or service catalog, cart & checkout, payment gateway integration, inventory management, and customer accounts.',
+      'A distinctive website, tailored to your business. Built for customers who need a more personalized, visually impressive, and feature-rich online presence.',
+    featuresHeading: 'Everything in Business, plus:',
     features: [
-      'Up to 25 Pages + Dynamic Product Catalog',
-      'Online Payment Gateway (PayHere / Stripe / Cards)',
-      'Order Management, Invoicing & Inventory Admin',
-      'Customer Accounts, Wishlists & Automated Emails',
-      'High-Conversion Mobile Checkout Flow',
-      '6 Months Dedicated Technical Support',
+      'Up to 10 website pages',
+      'Custom-designed website interface',
+      'Premium motion and scroll animations',
+      'Interactive portfolio and media galleries',
+      'Custom-designed website components',
+      'Advanced forms and inquiry flows',
+      'Basic admin dashboard or CMS for agreed content',
+      'Content filtering and search where applicable',
+      'Social sharing and integration',
+      'Enhanced SEO foundations',
+      'Structured data where relevant',
+      'Advanced performance optimization',
+      'Custom mobile experience',
+      'Deployment and configuration assistance',
+      '30 days of post-launch bug-fix support',
     ],
     highlighted: false,
-    deliveryTime: '14–21 Business Days',
-    buttonText: 'Choose E-Commerce Package',
+    deliveryTime: '7–14 working days',
+    bestFor:
+      'Established businesses, creative agencies, company websites, professional portfolios, and custom business websites.',
+    buttonText: 'CHOOSE PREMIUM',
     order: 3,
-    updatedAt: '2026-10-25T00:00:00.000Z',
-  },
-  {
-    id: 'pricing-android-app',
-    name: 'Native Android App Package',
-    price: 'LKR 95,000',
-    subtitle: 'Fixed-scope native Kotlin Android application ready for Google Play Store launch.',
-    description:
-      'Production-grade Android application with up to 10 custom screens, cloud database synchronization, user authentication, push notifications, and Play Store release.',
-    features: [
-      'Up to 10 Custom Native Android Screens (Kotlin)',
-      'User Authentication & Cloud Firestore Sync',
-      'Push Notifications & Offline-First Caching',
-      'Custom App Icon, Splash Screen & Dark Mode UI',
-      'Google Play Store Submission & Listing Assets',
-      '3 Months Post-Launch Maintenance',
-    ],
-    highlighted: false,
-    deliveryTime: '21–28 Business Days',
-    buttonText: 'Choose Android Package',
-    order: 4,
-    updatedAt: '2026-10-25T00:00:00.000Z',
-  },
-  {
-    id: 'pricing-webapp-mvp',
-    name: 'Custom Web App / SaaS MVP',
-    price: 'LKR 120,000',
-    subtitle: 'Full-stack React & TypeScript web application with role-based portals.',
-    description:
-      'Tailored software product with custom business logic, secure multi-role authentication, real-time cloud database, REST APIs, and analytics dashboard.',
-    features: [
-      'Full-Stack React, TypeScript & Cloud Architecture',
-      'Role-Based Admin & Client Portal Dashboards',
-      'Real-Time Database & Secure API Endpoints',
-      'Automated Reporting & Data Export Tools',
-      'Cloud Deployment (Appwrite / Firebase / Custom)',
-      '6 Months Engineering Support & SLA',
-    ],
-    highlighted: true,
-    deliveryTime: '3–4 Weeks',
-    buttonText: 'Choose Web App Package',
-    order: 5,
-    updatedAt: '2026-10-25T00:00:00.000Z',
-  },
-  {
-    id: 'pricing-uiux-redesign',
-    name: 'UI/UX & Performance Overhaul',
-    price: 'LKR 35,000',
-    subtitle: 'Fixed-price visual redesign, design system, and Core Web Vitals speed boost.',
-    description:
-      'Modernize an existing website or application with a luxury editorial interface, mobile responsiveness overhaul, technical SEO audit, and sub-second load times.',
-    features: [
-      'Complete UI/UX Audit & Interface Modernization',
-      'Interactive Design System & Component Library',
-      'Core Web Vitals & Lighthouse Speed Optimization',
-      'Mobile Responsiveness & Accessibility Fixes',
-      'Conversion Rate & Call-to-Action Restructuring',
-      '2 Months Follow-Up Optimization Support',
-    ],
-    highlighted: false,
-    deliveryTime: '7–10 Business Days',
-    buttonText: 'Choose Redesign Package',
-    order: 6,
-    updatedAt: '2026-10-25T00:00:00.000Z',
+    updatedAt: '2026-10-25T12:00:00.000Z',
   },
 ];
+
+export const CUSTOM_DEVELOPMENT_SOLUTIONS: string[] = [
+  'E-commerce websites',
+  'Advanced administration dashboards',
+  'Customer portals',
+  'Booking and reservation systems',
+  'Custom web applications',
+  'Firebase and database integrations',
+  'Android applications',
+  'AI-powered features',
+  'Custom business management systems',
+];
+
+export const IMPORTANT_PACKAGE_INFORMATION: string[] = [
+  'All prices are starting prices in Sri Lankan Rupees (LKR).',
+  'Domain registration, hosting subscriptions, paid plugins, and third-party services are charged separately unless explicitly included in the quotation.',
+  'Website content, images, and business information should be supplied by the customer.',
+  'Delivery estimates begin after requirements and necessary content are confirmed.',
+  'Advanced databases, user authentication, payment processing, and complex backend features require a separate quotation unless included in the agreed scope.',
+  'Post-launch support covers fixes for defects in delivered features, not unlimited redesigns or additional functionality.',
+  'Final scope, timelines, revisions, and payment milestones will be agreed before work begins.',
+];
+
 
