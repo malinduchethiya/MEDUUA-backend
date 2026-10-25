@@ -46,12 +46,83 @@ interface PortfolioContextValue {
   saveService: (service: ServiceItem) => Promise<void>;
   deleteService: (id: string) => Promise<void>;
   savePricingTier: (tier: PricingTierItem) => Promise<void>;
+  resetPricingToDefaults: () => Promise<void>;
+  resetSinglePricingTier: (id: string) => Promise<void>;
   submitInquiry: (inquiry: Omit<InquiryItem, 'id' | 'createdAt'>) => Promise<void>;
   deleteInquiry: (id: string) => Promise<void>;
   seedDefaultsToFirestore: () => Promise<void>;
 }
 
 const PortfolioContext = createContext<PortfolioContextValue | undefined>(undefined);
+
+const FIXED_PRICING_STORAGE_KEY = 'meduua_fixed_pricing_v2';
+const FIXED_PRICING_BASELINE_DATE = '2026-10-25T00:00:00.000Z';
+
+function loadMergedFixedPricing(remoteDocs?: PricingTierItem[]): PricingTierItem[] {
+  let localMap: Record<string, PricingTierItem> = {};
+  try {
+    const raw = localStorage.getItem(FIXED_PRICING_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as PricingTierItem[];
+      if (Array.isArray(parsed)) {
+        for (const item of parsed) {
+          if (item && item.id) {
+            localMap[item.id] = item;
+          }
+        }
+      }
+    }
+  } catch {
+    // ignore storage errors
+  }
+
+  const remoteMap: Record<string, PricingTierItem> = {};
+  if (Array.isArray(remoteDocs)) {
+    for (const docItem of remoteDocs) {
+      // Only apply remote doc if it was edited after our new fixed-package baseline
+      if (
+        docItem &&
+        docItem.id &&
+        docItem.updatedAt &&
+        docItem.updatedAt > FIXED_PRICING_BASELINE_DATE
+      ) {
+        remoteMap[docItem.id] = docItem;
+      }
+    }
+  }
+
+  return DEFAULT_PRICING.map((fixedSlot, index) => {
+    const localEdit = localMap[fixedSlot.id];
+    const remoteEdit = remoteMap[fixedSlot.id];
+
+    let chosen = fixedSlot;
+    if (localEdit && remoteEdit) {
+      chosen =
+        (remoteEdit.updatedAt || '') >= (localEdit.updatedAt || '')
+          ? remoteEdit
+          : localEdit;
+    } else if (localEdit) {
+      chosen = localEdit;
+    } else if (remoteEdit) {
+      chosen = remoteEdit;
+    }
+
+    return {
+      ...fixedSlot,
+      ...chosen,
+      id: fixedSlot.id,
+      order: index + 1,
+    };
+  });
+}
+
+function saveFixedPricingToStorage(tiers: PricingTierItem[]) {
+  try {
+    localStorage.setItem(FIXED_PRICING_STORAGE_KEY, JSON.stringify(tiers));
+  } catch {
+    // ignore storage quota errors
+  }
+}
 
 function clampStr(val: string, min: number, max: number, fallback: string): string {
   const trimmed = (val || '').trim();
@@ -77,7 +148,7 @@ function sanitizeSlug(raw: string): string {
 export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [projects, setProjects] = useState<ProjectItem[]>(DEFAULT_PROJECTS);
   const [services, setServices] = useState<ServiceItem[]>(DEFAULT_SERVICES);
-  const [pricing, setPricing] = useState<PricingTierItem[]>(DEFAULT_PRICING);
+  const [pricing, setPricing] = useState<PricingTierItem[]>(() => loadMergedFixedPricing());
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(false);
@@ -139,16 +210,12 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const unsubPricing = onSnapshot(
       collection(db, 'pricing'),
       (snap) => {
-        if (!snap.empty) {
-          const loaded: PricingTierItem[] = [];
-          snap.forEach((docSnap) => {
-            loaded.push({ id: docSnap.id, ...(docSnap.data() as Omit<PricingTierItem, 'id'>) });
-          });
-          loaded.sort((a, b) => a.order - b.order);
-          setPricing(loaded);
-        } else {
-          setPricing(DEFAULT_PRICING);
-        }
+        const loaded: PricingTierItem[] = [];
+        snap.forEach((docSnap) => {
+          loaded.push({ id: docSnap.id, ...(docSnap.data() as Omit<PricingTierItem, 'id'>) });
+        });
+        const merged = loadMergedFixedPricing(loaded);
+        setPricing(merged);
       },
       (err) => {
         handleFirestoreError(err, OperationType.GET, 'pricing');
@@ -379,19 +446,19 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (features.length === 0) features.push('Responsive custom website design');
 
     const payload = {
-      name: clampStr(tier.name, 2, 80, 'Package'),
-      price: clampStr(tier.price, 2, 60, 'LKR 10,000'),
+      name: clampStr(tier.name, 2, 80, 'Fixed Package'),
+      price: clampStr(tier.price, 2, 60, 'LKR 25,000'),
       subtitle: clampStr(
         tier.subtitle,
         4,
         160,
-        'Tailored web development package by MEDUUA.'
+        'Tailored fixed-scope development package by MEDUUA.'
       ),
       description: clampStr(
         tier.description,
         10,
         500,
-        'Comprehensive website design and engineering tailored to your business goals.'
+        'Comprehensive design and engineering package tailored to your business goals.'
       ),
       features,
       highlighted: Boolean(tier.highlighted),
@@ -408,12 +475,16 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
     setPricing((prev) => {
       const idx = prev.findIndex((p) => p.id === docId || (tier.id && p.id === tier.id));
+      let nextList: PricingTierItem[];
       if (idx >= 0) {
         const copy = [...prev];
-        copy[idx] = finalItem;
-        return copy.sort((a, b) => a.order - b.order);
+        copy[idx] = { ...finalItem, order: copy[idx].order };
+        nextList = copy.sort((a, b) => a.order - b.order);
+      } else {
+        nextList = [...prev, finalItem].sort((a, b) => a.order - b.order);
       }
-      return [...prev, finalItem].sort((a, b) => a.order - b.order);
+      saveFixedPricingToStorage(nextList);
+      return nextList;
     });
 
     if (isAdmin) {
@@ -425,6 +496,36 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     }
   };
 
+  const resetSinglePricingTier = async (id: string) => {
+    const defaultTier = DEFAULT_PRICING.find((t) => t.id === id);
+    if (!defaultTier) return;
+    await savePricingTier({
+      ...defaultTier,
+      updatedAt: new Date().toISOString(),
+    });
+  };
+
+  const resetPricingToDefaults = async () => {
+    const freshDefaults = DEFAULT_PRICING.map((tier, idx) => ({
+      ...tier,
+      order: idx + 1,
+      updatedAt: new Date().toISOString(),
+    }));
+    setPricing(freshDefaults);
+    saveFixedPricingToStorage(freshDefaults);
+
+    if (isAdmin) {
+      for (const tier of freshDefaults) {
+        const { id, ...payload } = tier;
+        try {
+          await setDoc(doc(db, 'pricing', id), payload);
+        } catch (error) {
+          handleFirestoreError(error, OperationType.WRITE, `pricing/${id}`);
+        }
+      }
+    }
+  };
+
   const submitInquiry = async (inquiry: Omit<InquiryItem, 'id' | 'createdAt'>) => {
     const docId = `inq-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     const nowIso = new Date().toISOString();
@@ -432,12 +533,12 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       name: clampStr(inquiry.name, 2, 100, 'Prospective Client'),
       email: clampStr(inquiry.email, 5, 150, 'client@example.com'),
       phone: clampStr(inquiry.phone, 5, 40, '+94 74 037 5253'),
-      packageInterest: clampStr(inquiry.packageInterest, 2, 100, 'Business — LKR 15,000'),
+      packageInterest: clampStr(inquiry.packageInterest, 2, 100, 'Business Growth Package — LKR 45,000'),
       message: clampStr(
         inquiry.message,
         1,
         2000,
-        'Interested in discussing a website development project with MEDUUA.'
+        'Interested in discussing a project with MEDUUA.'
       ),
       createdAt: nowIso,
     };
@@ -468,19 +569,13 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   };
 
   const seedDefaultsToFirestore = async () => {
-    if (!isAdmin) {
-      console.warn('Seeding requires verified Admin authorization');
-      return;
-    }
     for (const proj of DEFAULT_PROJECTS) {
       await saveProject(proj);
     }
     for (const svc of DEFAULT_SERVICES) {
       await saveService(svc);
     }
-    for (const tier of DEFAULT_PRICING) {
-      await savePricingTier(tier);
-    }
+    await resetPricingToDefaults();
   };
 
   return (
@@ -500,6 +595,8 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         saveService,
         deleteService,
         savePricingTier,
+        resetPricingToDefaults,
+        resetSinglePricingTier,
         submitInquiry,
         deleteInquiry,
         seedDefaultsToFirestore,

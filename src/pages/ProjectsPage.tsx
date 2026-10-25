@@ -11,7 +11,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
   const { projects } = usePortfolio();
   const [activeFilter, setActiveFilter] = useState<string>('All');
 
-  const filterTabs = ['All', 'Mobile App', 'Web Platform', 'Streaming'];
+  const filterTabs = ['All', 'Mobile App', 'Web Platform', 'Streaming', 'UI/UX', 'Websites'];
 
   const filteredProjects =
     activeFilter === 'All'

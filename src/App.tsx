@@ -17,9 +17,9 @@ import { AdminDashboardPage } from './pages/AdminDashboardPage';
 
 function parseHashRoute(): { page: PageRoute; slug: string | null } {
   const raw = window.location.hash.replace(/^#\/?/, '').trim();
-  if (!raw || raw === 'home') return { page: 'home', slug: null };
+  if (!raw || raw === 'home' || raw === '/') return { page: 'home', slug: null };
   const [segment, subSegment] = raw.split('/');
-  switch (segment) {
+  switch (segment.toLowerCase()) {
     case 'home':
       return { page: 'home', slug: null };
     case 'work':
@@ -28,7 +28,7 @@ function parseHashRoute(): { page: PageRoute; slug: string | null } {
         ? { page: 'case-study', slug: subSegment }
         : { page: 'projects', slug: null };
     case 'case-study':
-      return { page: 'case-study', slug: subSegment || 'white-room' };
+      return { page: 'case-study', slug: subSegment || 'white-room-the-protocol' };
     case 'services':
       return { page: 'services', slug: null };
     case 'pricing':
@@ -52,15 +52,19 @@ export default function App() {
   );
 
   useEffect(() => {
-    const onHashChange = () => {
+    const syncRouteFromLocation = () => {
       const parsed = parseHashRoute();
       setCurrentPage(parsed.page);
       if (parsed.slug) {
         setActiveProjectSlug(parsed.slug);
       }
     };
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    window.addEventListener('hashchange', syncRouteFromLocation);
+    window.addEventListener('popstate', syncRouteFromLocation);
+    return () => {
+      window.removeEventListener('hashchange', syncRouteFromLocation);
+      window.removeEventListener('popstate', syncRouteFromLocation);
+    };
   }, []);
 
   useEffect(() => {
@@ -84,7 +88,13 @@ export default function App() {
       setActiveProjectSlug(projectSlug);
       window.location.hash = `#/projects/${projectSlug}`;
     } else if (page === 'home') {
-      window.location.hash = '';
+      if (window.location.hash) {
+        window.history.pushState(
+          null,
+          '',
+          window.location.pathname + window.location.search
+        );
+      }
     } else {
       window.location.hash = `#/${page}`;
     }

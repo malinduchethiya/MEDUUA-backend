@@ -30,6 +30,12 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
   );
   const project = projects[currentIndex] || projects[0];
 
+  const isWhiteRoom =
+    project?.slug === 'white-room-the-protocol' || project?.id === 'white-room';
+
+  const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+
   const appScreenshots = [
     { title: 'Cover Screen', image: '/assets/extracted/casestudy_screen1.png' },
     { title: 'Choose Your Path', image: '/assets/extracted/casestudy_screen2.png' },
@@ -44,15 +50,48 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
       {/* 03A — Dark Hero Section matching Screen 03 */}
       <section className="relative overflow-hidden pt-8 pb-16 lg:pb-24 border-b border-[#1b2b24]">
         <div className="max-w-7xl mx-auto px-6 relative z-10 space-y-8">
-          {/* Back link */}
-          <button
-            type="button"
-            onClick={() => onNavigate('projects')}
-            className="inline-flex items-center gap-2 text-xs font-semibold text-[#94a3b8] hover:text-[#c9a66b] transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Projects</span>
-          </button>
+          {/* Top navigation links: Back to Home / Back to Projects / Prev & Next Project */}
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => onNavigate('home')}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#94a3b8] hover:text-[#c9a66b] transition-colors cursor-pointer"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" />
+                <span>Home</span>
+              </button>
+              <span className="text-[#273d34]">/</span>
+              <button
+                type="button"
+                onClick={() => onNavigate('projects')}
+                className="inline-flex items-center gap-2 text-xs font-semibold text-[#94a3b8] hover:text-[#c9a66b] transition-colors cursor-pointer"
+              >
+                <span>All Projects</span>
+              </button>
+            </div>
+
+            {projects.length > 1 && (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => onNavigate('case-study', prevProject.slug)}
+                  className="px-3 py-1.5 rounded-lg bg-[#13201b] border border-[#23382f] hover:border-[#c9a66b] text-xs text-[#cbd5e1] hover:text-[#c9a66b] transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <ArrowLeft className="w-3 h-3" />
+                  <span>Prev Project</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('case-study', nextProject.slug)}
+                  className="px-3 py-1.5 rounded-lg bg-[#13201b] border border-[#23382f] hover:border-[#c9a66b] text-xs text-[#cbd5e1] hover:text-[#c9a66b] transition-colors flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>Next Project</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
+              </div>
+            )}
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Title, Subtitle, Tags & Metrics */}
@@ -60,30 +99,39 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
               <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.22em] uppercase text-[#a3b899]">
                 <span>Project Case Study</span>
                 <span className="text-[#c9a66b]">—</span>
-                <span>Mobile Application</span>
+                <span>{project?.category || 'Mobile Application'}</span>
               </div>
 
-              <h1 className="font-serif-editorial text-4xl sm:text-6xl lg:text-[4.75rem] font-bold tracking-tight text-[#f5f2eb] leading-[1.08]">
-                WHITE ROOM:<br />
-                <span className="text-[#c9a66b]">THE PROTOCOL</span>
+              <h1 className="font-serif-editorial text-4xl sm:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-[#f5f2eb] leading-[1.08]">
+                {isWhiteRoom ? (
+                  <>
+                    WHITE ROOM:
+                    <br />
+                    <span className="text-[#c9a66b]">THE PROTOCOL</span>
+                  </>
+                ) : (
+                  <span className="text-[#f5f2eb]">{project?.title}</span>
+                )}
               </h1>
 
               <p className="text-sm sm:text-base text-[#94a3b8] leading-relaxed max-w-xl">
-                A cinematic psychological experience designed to challenge perspectives, build
-                self-awareness, and guide users through a journey of inner discovery.
+                {project?.shortDescription ||
+                  'A cinematic psychological experience designed to challenge perspectives, build self-awareness, and guide users through a journey of inner discovery.'}
               </p>
 
               {/* Tags */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#14231e] border border-[#273d34] text-[#cbd5e1]">
-                  Android App
-                </span>
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#14231e] border border-[#273d34] text-[#cbd5e1]">
-                  Psychological Experience
-                </span>
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#14231e] border border-[#273d34] text-[#cbd5e1]">
-                  Self-Development
-                </span>
+                {(project?.technologies?.length
+                  ? project.technologies
+                  : ['Android App', 'Psychological Experience', 'Self-Development']
+                ).map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#14231e] border border-[#273d34] text-[#cbd5e1]"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
               {/* 4 Metrics in a row matching Screen 03 */}
@@ -92,7 +140,7 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                   <p className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#f5f2eb]">
                     150K+
                   </p>
-                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Downloads</p>
+                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Downloads / Reach</p>
                 </div>
                 <div>
                   <p className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#c9a66b]">
@@ -102,26 +150,30 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                 </div>
                 <div>
                   <p className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#f5f2eb]">
-                    Featured
+                    {project?.status || 'Published'}
                   </p>
-                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Google Play</p>
+                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Release Status</p>
                 </div>
                 <div>
                   <p className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#f5f2eb]">
-                    Global
+                    {project?.year || '2024'}
                   </p>
-                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Audience</p>
+                  <p className="text-[11px] font-medium text-[#94a3b8] mt-0.5">Launch Year</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Dual Phones Mockup matching Screen 03 */}
+            {/* Right Mockup matching Screen 03 */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-md drop-shadow-2xl">
                 <img
-                  src="/assets/extracted/casestudy_dual_phones.png"
-                  alt="WHITE ROOM: THE PROTOCOL App Interface Mockups"
-                  className="w-full h-auto object-cover rounded-xl"
+                  src={
+                    isWhiteRoom
+                      ? '/assets/extracted/casestudy_dual_phones.png'
+                      : project?.screenshotUrl || '/assets/extracted/casestudy_dual_phones.png'
+                  }
+                  alt={`${project?.title || 'Project'} Interface Mockup`}
+                  className="w-full h-auto object-cover rounded-xl border border-[#1f312a]"
                 />
               </div>
             </div>
@@ -142,14 +194,12 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                   <span className="w-8 h-[1px] bg-[#64748b]/40" />
                 </div>
                 <h2 className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#111715]">
-                  An Interactive Journey Within
+                  {isWhiteRoom ? 'An Interactive Journey Within' : project?.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                  WHITE ROOM: THE PROTOCOL is a mobile application that blends storytelling,
-                  psychology, and immersive design to create a transformative self-development
-                  experience. Designed for modern minds, it uses interactive narratives and
-                  thought-provoking scenarios to help users explore perception, build self-awareness,
-                  and challenge their own realities.
+                  {project?.overview ||
+                    project?.shortDescription ||
+                    'WHITE ROOM: THE PROTOCOL is a mobile application that blends storytelling, psychology, and immersive design to create a transformative self-development experience.'}
                 </p>
               </div>
             </div>
@@ -161,7 +211,11 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                 className="w-full relative aspect-video rounded-xl overflow-hidden bg-[#0c1613] shadow-md border border-[#d6cfc0] group cursor-pointer"
               >
                 <img
-                  src="/assets/extracted/casestudy_trailer_thumb.png"
+                  src={
+                    isWhiteRoom
+                      ? '/assets/extracted/casestudy_trailer_thumb.png'
+                      : project?.screenshotUrl || '/assets/extracted/casestudy_trailer_thumb.png'
+                  }
                   alt="Watch Project Trailer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -181,17 +235,23 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
             <div className="lg:col-span-4 space-y-3 flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[#64748b]">
-                  <span>The Challenge</span>
+                  <span>The Challenge &amp; Solution</span>
                   <span className="w-8 h-[1px] bg-[#64748b]/40" />
                 </div>
                 <h2 className="font-serif-editorial text-2xl sm:text-3xl font-bold text-[#111715]">
-                  Turning Inner Exploration Into an Engaging Experience
+                  {isWhiteRoom
+                    ? 'Turning Inner Exploration Into an Engaging Experience'
+                    : 'Engineering Precision & Visual Clarity'}
                 </h2>
                 <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                  The challenge was to translate complex psychological concepts into an engaging,
-                  accessible, and visually immersive mobile experience that motivates users to
-                  reflect, grow, and return.
+                  {project?.challenge ||
+                    'The challenge was to translate complex concepts into an engaging, accessible, and visually immersive digital experience that motivates users to engage and return.'}
                 </p>
+                {project?.solution && (
+                  <p className="text-xs sm:text-sm text-[#475569] leading-relaxed pt-1">
+                    {project.solution}
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -206,8 +266,8 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">
                   Platform
                 </p>
-                <p className="text-sm font-bold text-[#111715]">Android</p>
-                <p className="text-[11px] text-[#64748b]">Mobile App</p>
+                <p className="text-sm font-bold text-[#111715]">{project?.category || 'Android'}</p>
+                <p className="text-[11px] text-[#64748b]">{project?.client || 'MEDUUA Studio'}</p>
               </div>
             </div>
 
@@ -219,8 +279,12 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">
                   Tech Stack
                 </p>
-                <p className="text-sm font-bold text-[#111715]">Kotlin</p>
-                <p className="text-[11px] text-[#64748b]">Android Native</p>
+                <p className="text-sm font-bold text-[#111715]">
+                  {project?.technologies?.[0] || 'Kotlin'}
+                </p>
+                <p className="text-[11px] text-[#64748b]">
+                  {project?.technologies?.[1] || 'Native Architecture'}
+                </p>
               </div>
             </div>
 
@@ -230,10 +294,12 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">
-                  Category
+                  Focus
                 </p>
-                <p className="text-sm font-bold text-[#111715]">Self-Development</p>
-                <p className="text-[11px] text-[#64748b]">Mental Wellness</p>
+                <p className="text-sm font-bold text-[#111715]">
+                  {project?.categorySubtitle?.split('|')[1]?.trim() || 'Digital Product'}
+                </p>
+                <p className="text-[11px] text-[#64748b]">Production Ready</p>
               </div>
             </div>
 
@@ -245,7 +311,7 @@ export const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ projectSlug, onNav
                 <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748b]">
                   Year
                 </p>
-                <p className="text-sm font-bold text-[#111715]">2024</p>
+                <p className="text-sm font-bold text-[#111715]">{project?.year || '2024'}</p>
                 <p className="text-[11px] text-[#64748b]">Launch</p>
               </div>
             </div>

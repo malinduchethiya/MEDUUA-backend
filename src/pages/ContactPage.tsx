@@ -16,7 +16,7 @@ import { usePortfolio } from '../context/PortfolioContext';
 import { getWhatsAppUrl, WHATSAPP_NUMBER_DISPLAY } from '../firebase';
 
 export const ContactPage: React.FC = () => {
-  const { submitInquiry } = usePortfolio();
+  const { submitInquiry, pricing } = usePortfolio();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -218,23 +218,35 @@ export const ContactPage: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Project Type */}
+                    {/* Fixed Package / Project Type */}
                     <div className="space-y-1.5">
                       <label className="text-xs font-bold text-[#111715]">
-                        Project Type <span className="text-[#c9a66b]">*</span>
+                        Fixed Package / Project Type <span className="text-[#c9a66b]">*</span>
                       </label>
                       <select
                         value={projectType}
-                        onChange={(e) => setProjectType(e.target.value)}
+                        onChange={(e) => {
+                          const selectedVal = e.target.value;
+                          setProjectType(selectedVal);
+                          const matchedTier = pricing.find((t) => t.name === selectedVal);
+                          if (matchedTier) {
+                            setBudget(`${matchedTier.price} (Fixed Package)`);
+                          }
+                        }}
                         className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-lg text-xs sm:text-sm text-[#111715] focus:outline-none focus:border-[#c9a66b] focus:ring-1 focus:ring-[#c9a66b]"
                       >
-                        <option value="">Select a project type</option>
-                        <option value="Website Design & Development">Website Design & Development</option>
-                        <option value="Full-Stack Web Applications">Full-Stack Web Applications</option>
-                        <option value="Android App Development">Android App Development</option>
-                        <option value="UI/UX Design">UI/UX Design</option>
-                        <option value="Custom Software Solutions">Custom Software Solutions</option>
-                        <option value="Website Improvement & Optimization">Website Improvement & Optimization</option>
+                        <option value="">Select a fixed package or service</option>
+                        <optgroup label="Fixed Packages">
+                          {pricing.map((tier) => (
+                            <option key={tier.id} value={tier.name}>
+                              {tier.name} — {tier.price}
+                            </option>
+                          ))}
+                        </optgroup>
+                        <optgroup label="Custom Engineering Services">
+                          <option value="Custom Software Solutions">Custom Software Solutions</option>
+                          <option value="Enterprise Consultation">Enterprise Consultation</option>
+                        </optgroup>
                       </select>
                     </div>
                   </div>
@@ -247,11 +259,13 @@ export const ContactPage: React.FC = () => {
                       onChange={(e) => setBudget(e.target.value)}
                       className="w-full px-3.5 py-2.5 bg-white border border-[#d6cfc0] rounded-lg text-xs sm:text-sm text-[#111715] focus:outline-none focus:border-[#c9a66b] focus:ring-1 focus:ring-[#c9a66b]"
                     >
-                      <option value="">Select budget range</option>
-                      <option value="Under LKR 15,000">Under LKR 15,000</option>
-                      <option value="LKR 15,000 - 25,000">LKR 15,000 - 25,000</option>
-                      <option value="LKR 25,000 - 50,000">LKR 25,000 - 50,000</option>
-                      <option value="LKR 50,000+">LKR 50,000+</option>
+                      <option value="">Select budget range or fixed package price</option>
+                      {pricing.map((tier) => (
+                        <option key={tier.id} value={`${tier.price} (Fixed Package)`}>
+                          {tier.price} — {tier.name}
+                        </option>
+                      ))}
+                      <option value="LKR 150,000+ (Enterprise)">LKR 150,000+ (Enterprise)</option>
                       <option value="Custom Quote">Custom Quote</option>
                     </select>
                   </div>
