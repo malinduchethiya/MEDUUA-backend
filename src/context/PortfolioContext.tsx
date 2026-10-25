@@ -160,8 +160,18 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   );
 
   useEffect(() => {
-    const unsubAuth = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubAuth = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        try {
+          await currentUser.getIdToken();
+          setUser(currentUser);
+        } catch {
+          await firebaseSignOut(auth).catch(() => {});
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
       setAuthReady(true);
     });
     return () => unsubAuth();
@@ -255,7 +265,13 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }, [authReady, isAdmin]);
 
   const signInAdmin = async () => {
-    await signInWithPopup(auth, googleProvider);
+    try {
+      const cred = await signInWithPopup(auth, googleProvider);
+      await cred.user.getIdToken();
+    } catch (err) {
+      await firebaseSignOut(auth).catch(() => {});
+      throw err;
+    }
   };
 
   const signOutAdmin = async () => {

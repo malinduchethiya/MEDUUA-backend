@@ -1,81 +1,41 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import animeImport from 'animejs';
 
 const anime: any = (animeImport as any).default || animeImport;
 
 /**
- * Generates the 20 layered 3D cross-sectional SVG paths of the CodePen
- * "SVG sphere animation with anime.js" (by Julian Garnier) in a 440x440 viewBox.
- * Each slice lies along the diagonal axis from bottom-right (361.6, 361.2) to top-left (78.4, 78.8)
- * with organic harmonic wave contours across the 20 cross-sections.
+ * Exact 21 3D spherical cross-section SVG paths from Julian Garnier's CodePen
+ * "SVG sphere animation with anime.js" (viewBox 0 0 440 440).
  */
-const SPHERE_PATHS: string[] = Array.from({ length: 20 }, (_, idx) => {
-  const total = 20;
-  // Normalized slice position u in [-0.94, +0.94] from bottom-right to top-left
-  const t = idx / (total - 1);
-  const u = 0.925 - t * 1.85;
-
-  const R = 196; // Sphere outer radius inside 440x440 viewBox
-  const d = u * R; // Signed distance along the (1, 1)/sqrt(2) axis
-  const sliceRadius = Math.sqrt(Math.max(12, R * R - d * d));
-
-  // Center of this cross-sectional slice in SVG coordinates
-  const invSqrt2 = Math.SQRT1_2;
-  const cx = 220 + d * invSqrt2;
-  const cy = 220 + d * invSqrt2;
-
-  // Major semi-axis (perpendicular to diagonal: (-1, 1)/sqrt(2))
-  const majorA = sliceRadius;
-  // Minor semi-axis (foreshortened 3D tilt along diagonal: (1, 1)/sqrt(2))
-  const minorB = sliceRadius * 0.36;
-
-  // Envelope for organic multi-lobe harmonic undulation (strongest in middle slices, subtle at poles)
-  const envelope = Math.sin(t * Math.PI);
-  const numSamples = 64;
-  const pts: Array<{ x: number; y: number }> = [];
-
-  for (let k = 0; k < numSamples; k++) {
-    const theta = (k / numSamples) * Math.PI * 2;
-
-    // Harmonic surface waves matching the sculpted CodePen sphere rings
-    const wave1 = Math.sin(theta * 5 + idx * 0.55) * 6.8 * Math.pow(envelope, 1.35);
-    const wave2 = Math.cos(theta * 3 - idx * 0.4) * 4.2 * envelope;
-    const wave3 = Math.sin(theta * 8 + idx * 0.85) * 2.4 * Math.pow(envelope, 1.8);
-
-    const localMajor = (majorA + wave1 + wave3) * Math.cos(theta);
-    const localMinor = (minorB + wave2 + wave1 * 0.45) * Math.sin(theta);
-
-    // Rotate by -45 degrees: major axis along (-1, 1)/sqrt(2), minor axis along (1, 1)/sqrt(2)
-    const x = cx - localMajor * invSqrt2 + localMinor * invSqrt2;
-    const y = cy + localMajor * invSqrt2 + localMinor * invSqrt2;
-
-    pts.push({ x, y });
-  }
-
-  // Convert closed sample ring into smooth cubic Catmull-Rom -> Bezier SVG path
-  let pathData = `M ${pts[0].x.toFixed(2)} ${pts[0].y.toFixed(2)}`;
-  for (let k = 0; k < numSamples; k++) {
-    const p0 = pts[(k - 1 + numSamples) % numSamples];
-    const p1 = pts[k];
-    const p2 = pts[(k + 1) % numSamples];
-    const p3 = pts[(k + 2) % numSamples];
-
-    const cp1x = p1.x + (p2.x - p0.x) / 6;
-    const cp1y = p1.y + (p2.y - p0.y) / 6;
-    const cp2x = p2.x - (p3.x - p1.x) / 6;
-    const cp2y = p2.y - (p3.y - p1.y) / 6;
-
-    pathData += ` C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)}, ${cp2x.toFixed(2)} ${cp2y.toFixed(2)}, ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`;
-  }
-
-  return `${pathData} Z`;
-});
+const SPHERE_PATHS: string[] = [
+  'M361.604 361.238c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z',
+  'M360.72 360.354c-35.879 35.88-75.254 54.677-87.946 41.985-12.692-12.692 6.105-52.067 41.985-87.947 35.879-35.879 75.254-54.676 87.946-41.984 12.692 12.692-6.105 52.067-41.984 87.946z',
+  'M357.185 356.819c-44.91 44.91-94.376 68.258-110.485 52.149-16.11-16.11 7.238-65.575 52.149-110.485 44.91-44.91 94.376-68.259 110.485-52.15 16.11 16.11-7.239 65.576-52.149 110.486z',
+  'M350.998 350.632c-53.21 53.209-111.579 81.107-130.373 62.313-18.794-18.793 9.105-77.163 62.314-130.372 53.209-53.21 111.579-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z',
+  'M343.043 342.677c-59.8 59.799-125.292 91.26-146.283 70.268-20.99-20.99 10.47-86.483 70.269-146.282 59.799-59.8 125.292-91.26 146.283-70.269 20.99 20.99-10.47 86.484-70.27 146.283z',
+  'M334.646 334.28c-65.169 65.169-136.697 99.3-159.762 76.235-23.065-23.066 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z',
+  'M324.923 324.557c-69.806 69.806-146.38 106.411-171.031 81.76-24.652-24.652 11.953-101.226 81.759-171.032 69.806-69.806 146.38-106.411 171.031-81.76 24.652 24.653-11.953 101.226-81.759 171.032z',
+  'M312.99 312.625c-73.222 73.223-153.555 111.609-179.428 85.736-25.872-25.872 12.514-106.205 85.737-179.428s153.556-111.609 179.429-85.737c25.872 25.873-12.514 106.205-85.737 179.429z',
+  'M300.175 299.808c-75.909 75.909-159.11 115.778-185.837 89.052-26.726-26.727 13.143-109.929 89.051-185.837 75.908-75.908 159.11-115.778 185.837-89.051 26.726 26.726-13.143 109.928-89.051 185.836z',
+  'M284.707 284.34c-77.617 77.617-162.303 118.773-189.152 91.924-26.848-26.848 14.308-111.534 91.924-189.15C265.096 109.496 349.782 68.34 376.63 95.188c26.849 26.849-14.307 111.535-91.923 189.151z',
+  'M269.239 267.989c-78.105 78.104-163.187 119.656-190.035 92.807-26.849-26.848 14.703-111.93 92.807-190.035 78.105-78.104 163.187-119.656 190.035-92.807 26.849 26.848-14.703 111.93-92.807 190.035z',
+  'M252.887 252.52C175.27 330.138 90.584 371.294 63.736 344.446 36.887 317.596 78.043 232.91 155.66 155.293 233.276 77.677 317.962 36.521 344.81 63.37c26.85 26.848-14.307 111.534-91.923 189.15z',
+  'M236.977 236.61C161.069 312.52 77.867 352.389 51.14 325.663c-26.726-26.727 13.143-109.928 89.052-185.837 75.908-75.908 159.11-115.777 185.836-89.05 26.727 26.726-13.143 109.928-89.051 185.836z',
+  'M221.067 220.7C147.844 293.925 67.51 332.31 41.639 306.439c-25.873-25.873 12.513-106.206 85.736-179.429C200.6 53.786 280.931 15.4 306.804 41.272c25.872 25.873-12.514 106.206-85.737 179.429z',
+  'M205.157 204.79c-69.806 69.807-146.38 106.412-171.031 81.76-24.652-24.652 11.953-101.225 81.759-171.031 69.806-69.807 146.38-106.411 171.031-81.76 24.652 24.652-11.953 101.226-81.759 171.032z',
+  'M189.247 188.881c-65.169 65.169-136.696 99.3-159.762 76.235-23.065-23.065 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z',
+  'M173.337 172.971c-59.799 59.8-125.292 91.26-146.282 70.269-20.991-20.99 10.47-86.484 70.268-146.283 59.8-59.799 125.292-91.26 146.283-70.269 20.99 20.991-10.47 86.484-70.269 146.283z',
+  'M157.427 157.061c-53.209 53.21-111.578 81.108-130.372 62.314-18.794-18.794 9.104-77.164 62.313-130.373 53.21-53.209 111.58-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z',
+  'M141.517 141.151c-44.91 44.91-94.376 68.259-110.485 52.15-16.11-16.11 7.239-65.576 52.15-110.486 44.91-44.91 94.375-68.258 110.485-52.15 16.109 16.11-7.24 65.576-52.15 110.486z',
+  'M125.608 125.241c-35.88 35.88-75.255 54.677-87.947 41.985-12.692-12.692 6.105-52.067 41.985-87.947C115.525 43.4 154.9 24.603 167.592 37.295c12.692 12.692-6.105 52.067-41.984 87.946z',
+  'M109.698 109.332c-24.408 24.407-51.12 37.268-59.663 28.726-8.542-8.543 4.319-35.255 28.727-59.662 24.407-24.408 51.12-37.27 59.662-28.727 8.543 8.543-4.319 35.255-28.726 59.663z',
+];
 
 export const SvgSphereAnimation: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gradientRef = useRef<SVGLinearGradientElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const svgEl = svgRef.current;
     const gradientEl = gradientRef.current;
     if (!svgEl || !gradientEl) return;
@@ -84,39 +44,44 @@ export const SvgSphereAnimation: React.FC = () => {
     const pathLength = spherePathEls.length;
     const animations: any[] = [];
 
-    // 1. Create individual paused path animations sought by the breathing loop
-    spherePathEls.forEach((pathEl, i) => {
-      animations.push(
-        anime({
-          targets: pathEl,
-          stroke: {
-            value: ['rgba(255,75,75,1)', 'rgba(80,80,80,.35)'],
-            duration: 500,
-          },
-          translateX: [2, -4],
-          translateY: [2, -4],
-          easing: 'easeOutQuad',
-          autoplay: false,
-        })
-      );
+    // Pre-initialize strokeDasharray & strokeDashoffset before first browser paint
+    // so paths never flash visible or jump while waiting for their reverse stagger delay.
+    const dashOffsets = spherePathEls.map((pathEl) => {
+      const offset = anime.setDashoffset(pathEl);
+      pathEl.setAttribute('stroke-dashoffset', String(offset));
+      pathEl.style.strokeDashoffset = `${offset}px`;
+      return offset;
     });
+
+    // 1. Create individual paused path animations sought exclusively by breathAnimation
+    // (Never call .play() on these, as they are driven purely via .seek() on each frame)
+    for (let i = 0; i < pathLength; i++) {
+      const anim = anime({
+        targets: spherePathEls[i],
+        stroke: {
+          value: ['rgba(255,75,75,1)', 'rgba(80,80,80,.35)'],
+          duration: 500,
+        },
+        translateX: [2, -4],
+        translateY: [2, -4],
+        easing: 'easeOutQuad',
+        autoplay: false,
+      });
+
+      // Pre-seek to t = 0 state before first paint to prevent a 1-frame startup jump
+      const initialPercent = (1 - Math.sin(i * 0.35)) / 2;
+      anim.seek(anim.duration * initialPercent);
+      animations.push(anim);
+    }
 
     // 2. Continuous sine-wave breathing loop (CodePen breathAnimation)
     const breathAnimation = anime({
-      begin: () => {
-        for (let i = 0; i < pathLength; i++) {
-          const anim = animations[i];
-          if (anim) anim.play();
-        }
-      },
       update: (ins: any) => {
-        spherePathEls.forEach((_pathEl, i) => {
+        for (let i = 0; i < animations.length; i++) {
+          const animation = animations[i];
           const percent = (1 - Math.sin(i * 0.35 + 0.0022 * ins.currentTime)) / 2;
-          const anim = animations[i];
-          if (anim) {
-            anim.seek(anim.duration * percent);
-          }
-        });
+          animation.seek(animation.duration * percent);
+        }
       },
       duration: Infinity,
       autoplay: false,
@@ -131,7 +96,7 @@ export const SvgSphereAnimation: React.FC = () => {
         {
           targets: spherePathEls,
           strokeDashoffset: {
-            value: [anime.setDashoffset, 0],
+            value: (_el: SVGPathElement, i: number) => [dashOffsets[i], 0],
             duration: 3900,
             easing: 'easeInOutCirc',
             delay: anime.stagger(190, { direction: 'reverse' }),
@@ -158,7 +123,6 @@ export const SvgSphereAnimation: React.FC = () => {
       0
     );
 
-    // Initialize and play exactly as in the CodePen demo
     introAnimation.play();
     breathAnimation.play();
     shadowAnimation.play();
@@ -217,3 +181,4 @@ export const SvgSphereAnimation: React.FC = () => {
 };
 
 export default SvgSphereAnimation;
+
